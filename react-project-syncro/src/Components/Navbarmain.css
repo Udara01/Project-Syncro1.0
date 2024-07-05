@@ -1,0 +1,33 @@
+/* Navbarmain.css */
+
+.navbarmain-container {
+  position: relative;
+}
+
+.sidebar-overlay {
+  position: fixed;
+  top: 0;
+  left: -250px; /* Start off-screen */
+  width: 250px;
+  height: 100%;
+  background-color: #fff;
+  transition: left 0.3s ease-in-out;
+  z-index: 1000; /* Ensure sidebar appears above navbar */
+}
+
+.sidebar-overlay.active {
+  left: 0; /* Slide in when active */
+}
+
+/* Adjust padding for main content to avoid overlapping with sidebar */
+.navbarmain-container .navbar {
+  padding-left: 250px; /* Adjust based on sidebar width */
+}
+
+.navbarmain-container .navbar-collapse {
+  transition: padding-left 0.3s ease-in-out;
+}
+
+.navbarmain-container .navbar-collapse.collapse.show {
+  padding-left: 0; /* Reset padding when navbar collapses */
+}
