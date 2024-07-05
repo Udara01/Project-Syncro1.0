@@ -1,0 +1,21 @@
+.header {
+  padding: 1rem 2rem;
+  top: 6px;
+}
+
+.header .btn-outline-dark,
+.header .btn-primary {
+  border-radius: 30px;
+  padding: 6px 30px;
+  font-size: 16px;
+}
+
+.header .btn-outline-dark {
+  margin-left: 1100px;
+  margin-right: 20px;
+}
+
+.header .btn-primary {
+  margin-left: 10px;
+  margin-right: 20px;
+}
