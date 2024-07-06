@@ -1,7 +1,6 @@
 import React from 'react';
-import HeaderLanding from '../Components/HeaderLanding';
-import MainContentLanding from '../Components/MainContentLanding';
-import Footer from '../Components/Footer';
+import { HeaderLanding, MainContentLanding } from '../Components/HeaderLanding'; // Adjust the import path as needed
+import Footer from '../Components/Layouts/Footer';
 
 function Landing() {
   return (

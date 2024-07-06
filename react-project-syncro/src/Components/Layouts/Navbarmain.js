@@ -7,6 +7,7 @@ import { AiOutlineUser } from "react-icons/ai";
 import { TiThMenu } from "react-icons/ti";
 
 import Sidebar from "./SidebarHome";
+//import '../../styles/Navbarmain.css';
 
 function Navbarmain() {
   const [showSidebar, setShowSidebar] = useState(false);
