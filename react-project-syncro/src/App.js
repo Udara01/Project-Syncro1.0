@@ -1,19 +1,19 @@
-import logo from './logo.svg';
 import './App.css';
 import { Routes, Route } from "react-router-dom";
 
-import HeaderLanding from './Components/HeaderLanding';
-import MainContentLanding from './Components/MainContentLanding';
-import Navbarmain from './Components/Navbarmain';
-import Footer from './Components/Footer';
+import Landing from './Pages/Landing';//Landing page
+import SignUp from './Pages/SignUp';
+import Home from './Pages/Home';//Home page
 
 function App() {
   return (
     <div className="App">
-      <HeaderLanding />
-      <MainContentLanding />      
-      <Footer />
 
+    <Routes>
+      <Route path='/' element={<Landing></Landing>}></Route>
+      <Route path='/signup' element={<SignUp></SignUp>}></Route>
+      <Route path='/home' element={<Home></Home>}></Route>
+    </Routes>
     </div>
     
   );
