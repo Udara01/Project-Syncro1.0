@@ -2,20 +2,25 @@
 
 import React from 'react';
 import { Navbar, Nav, Button } from 'react-bootstrap';
+import { LinkContainer } from 'react-router-bootstrap';
 import './HeaderLanding.css';
 
 const HeaderLanding = () => {
   return (
     <Navbar bg="light" expand="lg" className="header">
       <Navbar.Brand href="#">
-        <img src="logo.png" alt="Syncro Logo" width="40" className="d-inline-block align-top" style={{ marginLeft:'20px' }}/> {/* Replace with your logo */}
+        <img src="logo.png" alt="Syncro Logo" width="40" className="d-inline-block align-top" style={{ marginLeft: '20px' }} /> {/* Replace with your logo */}
         Syncro
       </Navbar.Brand>
       <Navbar.Toggle aria-controls="basic-navbar-nav" />
       <Navbar.Collapse id="basic-navbar-nav">
         <Nav className="ml-auto">
-          <Button variant="outline-dark" className="mr-2">Signing</Button>
-          <Button variant="primary">Signup</Button>
+          <LinkContainer to="/signin">
+            <Button variant="outline-dark" className="mr-2">Sign In</Button>
+          </LinkContainer>
+          <LinkContainer to="/signup">
+            <Button variant="primary">Sign Up</Button>
+          </LinkContainer>
         </Nav>
       </Navbar.Collapse>
     </Navbar>
@@ -23,3 +28,5 @@ const HeaderLanding = () => {
 };
 
 export default HeaderLanding;
+
+

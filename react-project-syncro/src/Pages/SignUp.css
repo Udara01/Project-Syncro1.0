@@ -1,0 +1,11 @@
+.signup-content {
+  background-color: #f8f9fa;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+h2 {
+  color: #343a40;
+}
