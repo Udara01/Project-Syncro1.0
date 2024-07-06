@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Container, Row, Col, Form, Button, Alert } from 'react-bootstrap';
-import './SignUp.css';
+import '../../../styles/SignUp.css'
 
 const SignUp = () => {
   const [email, setEmail] = useState('');
