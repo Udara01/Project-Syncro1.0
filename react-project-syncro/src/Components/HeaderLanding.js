@@ -17,7 +17,7 @@ const HeaderLanding = () => {
       <Navbar.Toggle aria-controls="basic-navbar-nav" />
       <Navbar.Collapse id="basic-navbar-nav">
         <Nav className="ml-auto">
-          <LinkContainer to="/signin">
+          <LinkContainer to="/login">
             <Button variant="outline-dark" className="mr-2">Sign In</Button>
           </LinkContainer>
           <LinkContainer to="/signup">
