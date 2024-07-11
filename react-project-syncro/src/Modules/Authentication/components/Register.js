@@ -2,11 +2,15 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import { useNavigate } from 'react-router-dom';
+
 
 const Register = () => {
     const [formData, setFormData] = useState({ username: '', email: '', password: '' });
 
     const { username, email, password } = formData;
+
+    const navigate = useNavigate();
 
     const onChange = e => setFormData({ ...formData, [e.target.name]: e.target.value });
 
@@ -15,6 +19,8 @@ const Register = () => {
         try {
             const res = await axios.post('http://localhost:4000/api/auth/register', formData, { withCredentials: true });
             console.log(res.data);
+
+            navigate('/home');
         } catch (err) {
             console.error(err.response.data);
         }

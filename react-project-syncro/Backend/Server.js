@@ -21,7 +21,7 @@ app.use(cookieParser()); // Use cookie-parser middleware
 
 // Routers
 
-app.use('/api/auth', authRoutes);
+app.use('/api/auth', authRoutes);//For the authentication
 
 const projectCreate = require('./Routers/projectCreating');
 app.use('/createP', projectCreate);
@@ -35,6 +35,7 @@ const projectRouter = require('./Routers/projectCreating');
 app.use('/api', projectRouter);
 
 app.use('/api/projects', projectRouter);
+
 
 
 ////////////////////
@@ -62,3 +63,7 @@ app.listen(PORT, () => {
 app.get('/', function(req, res) {
   res.send(`<h1>Server is running on ${PORT}</h1>`);
 });
+
+
+
+
