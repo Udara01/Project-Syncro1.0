@@ -41,7 +41,6 @@ const MainContentLanding = () => {
           <p>Whether you're working from the office or remotely, Project Manager offers a comprehensive suite of tools to keep your projects on track. From task management and milestone tracking to real-time chat and document management, we've got you covered.</p>
           <p>Get started now and experience a new level of productivity and collaboration.</p>
           <Button variant="dark" className="mt-3">Signing</Button>
-          <a href="/home">Home</a> 
         </Col>
         <Col md={6}>
           <video controls className="img-fluid">

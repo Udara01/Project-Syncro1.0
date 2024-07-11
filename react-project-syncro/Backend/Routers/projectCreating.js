@@ -76,6 +76,22 @@ router.get('/', async (req, res) => {
     res.status(500).json({ message: 'Error fetching projects', error });
   }
 });
+// Middleware to get user email from request (you might have your own way to get the logged-in user)
+const getUserEmail = (req) => {
+  // Extract user email from request, for example from a session or token
+  return req.user.email;
+};
+
+// Fetch projects for the logged-in user
+router.get('/', async (req, res) => {
+  const userEmail = getUserEmail(req);
+  try {
+    const projects = await Project.find({ 'teamMembers.email': userEmail });
+    res.json(projects);
+  } catch (error) {
+    res.status(500).send('Server Error');
+  }
+});
 
 
 module.exports = router;
