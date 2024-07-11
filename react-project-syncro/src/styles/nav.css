@@ -1,0 +1,25 @@
+.project-navbar-container {
+  background-color: #ffffff;
+  padding: 10px 20px;
+  border-radius: 10px;
+  margin-bottom: 20px;
+ /* margin-left: 280px;*/
+  margin-top: 30px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.nav-link-custom {
+  color: #5a5a5a;
+  transition: color 0.3s ease, background-color 0.3s ease;
+}
+
+.nav-link-custom.active {
+  background-color: #f8f9fa !important;
+  color: #007bff !important;
+  font-weight: bold;
+}
+
+.nav-link-custom:hover {
+  color: #0056b3 !important;
+  background-color: #f1f1f1 !important;
+}
