@@ -5,11 +5,14 @@ import { FaBell, FaSearch } from "react-icons/fa";
 import { IoSettingsOutline } from "react-icons/io5";
 import { AiOutlineUser } from "react-icons/ai";
 import { TiThMenu } from "react-icons/ti";
+import { useNavigate } from 'react-router-dom';
+import axios from 'axios';
 
 import Sidebar from "./SidebarHome";
 
 function Navbarmain() {
   const [showSidebar, setShowSidebar] = useState(false);
+  const navigate = useNavigate();
 
   const toggleSidebar = () => {
     setShowSidebar(!showSidebar);
@@ -17,6 +20,15 @@ function Navbarmain() {
 
   const handleSearch = () => {
     alert('Search icon clicked');
+  };
+
+  const handleLogout = async () => {
+    try {
+      await axios.post('http://localhost:4000/api/auth/logout', {}, { withCredentials: true });
+      navigate('/login'); // Redirect to login page
+    } catch (err) {
+      console.error(err.response?.data || err.message);
+    }
   };
 
   return (
@@ -62,7 +74,7 @@ function Navbarmain() {
             >
               <NavDropdown.Item href="#profile">John John</NavDropdown.Item>
               <NavDropdown.Divider />
-              <NavDropdown.Item href="#logout">Log out</NavDropdown.Item>
+              <NavDropdown.Item onClick={handleLogout}>Log out</NavDropdown.Item>
             </NavDropdown>
 
             <Nav.Link href="#settings"><IoSettingsOutline style={{ fontSize: '22px', marginRight: '40px', marginLeft: '20px' }} /></Nav.Link>
