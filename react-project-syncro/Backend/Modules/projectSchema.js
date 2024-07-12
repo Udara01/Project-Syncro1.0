@@ -1,3 +1,5 @@
+//this is use to store about project data
+
 const mongoose = require('mongoose');
 
 // Define the team member schema

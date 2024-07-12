@@ -1,3 +1,5 @@
+//user registration, login and logout process routes control by in here
+
 const express = require('express');
 const jwt = require('jsonwebtoken');
 const router = express.Router();
@@ -41,7 +43,10 @@ router.post('/login', async (req, res) => {
         const token = jwt.sign(payload, JWT_SECRET, { expiresIn: '1h' });
 
         res.cookie('token', token, { httpOnly: true });
-        res.json({ token });
+        res.json({ token,
+            username: user.username,
+            useremail: user.email
+         });
     } catch (err) {
         console.error(err.message);
         res.status(500).send('Server error');

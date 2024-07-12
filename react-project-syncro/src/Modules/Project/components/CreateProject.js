@@ -1,7 +1,9 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import { Form, Button, Col, Row, Dropdown, DropdownButton, Alert } from 'react-bootstrap';
 import axios from 'axios';
 import UserSearch from '../../SearchUsers/userSearch'; // Import UserSearch component
+
+import { UserContext } from "../../../contexts/UserContext"; // Import user context
 
 const CreateProject = ({ onProjectCreated }) => {
   const [projectName, setProjectName] = useState('');
@@ -17,6 +19,8 @@ const CreateProject = ({ onProjectCreated }) => {
   const handleImageChange = (e) => {
     setImage(e.target.files[0]);
   };
+
+  const { user } = useContext(UserContext); // Adding user context
 
   const handleUserFound = (user) => {
     setUserExists(!!user);
@@ -42,7 +46,7 @@ const CreateProject = ({ onProjectCreated }) => {
     formData.append('projectImage', image);
     formData.append('numberOfMembers', teamMembers.length);
     formData.append('teamMembers', JSON.stringify(teamMembers));
-    formData.append('creatorEmail', 'creator@example.com');
+    formData.append('creatorEmail', user?.useremail);
 
     try {
       const response = await axios.post('http://localhost:4000/api/projects', formData);

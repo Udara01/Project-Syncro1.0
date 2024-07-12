@@ -1,11 +1,15 @@
-import React from 'react';
+import React, { useContext } from "react";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { FaHome, FaTasks } from 'react-icons/fa';
 import { LuUsers } from 'react-icons/lu';
 import { FiLayers } from 'react-icons/fi';
 import { IoIosSettings } from 'react-icons/io';
 
+import { UserContext } from "../../contexts/UserContext"; // Import user context
+
 const Sidebar = ({ show }) => {
+  const { user } = useContext(UserContext); // Adding user context
+
   return (
     <div
       className={`sidebar ${show ? 'show' : ''}`}
@@ -23,20 +27,20 @@ const Sidebar = ({ show }) => {
         paddingBottom: '100px', // Ensure space at the bottom for the footer
       }}
     >
-
-      <a
-        href="/"
-        className="d-flex align-items-center mb-3 mb-md-0 me-md-auto link-dark text-decoration-none"
-      >
-        <span className="fs-4">Profile part</span>
-      </a>
-      <br />
-      <br />
+      <div className="d-flex flex-column align-items-center mb-3 mt-3">
+        <div className="user-avatar bg-primary rounded-circle d-flex justify-content-center align-items-center mb-3" style={{ width: '80px', height: '80px' }}>
+          <span className="text-white fs-2">{user?.username?.charAt(0)}</span>
+        </div>
+        <div className="text-center">
+          <span className="fs-5 fw-bold">{user?.username}</span>
+          <br />
+          <span className="text-muted">{user?.useremail}</span>
+        </div>
+      </div>
       <hr />
-
       <ul className="nav nav-pills flex-column mb-auto">
         <li className="nav-item">
-          <a href="#" className="nav-link active d-flex align-items-center">
+          <a href="/home" className="nav-link active d-flex align-items-center">
             <FaHome className="me-2" />
             <span>Home</span>
           </a>
