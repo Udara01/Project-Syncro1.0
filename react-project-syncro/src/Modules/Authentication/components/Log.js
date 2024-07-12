@@ -1,13 +1,18 @@
 // src/components/Login.js
-import React, { useState } from 'react';
+import React, { useState, useContext  } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import 'bootstrap/dist/css/bootstrap.min.css';
+
+import { UserContext } from '../../../contexts/UserContext'; 
+
 
 const Log = () => {
     const [formData, setFormData] = useState({ email: '', password: '' });
 
     const { email, password } = formData;
+
+    const { setUser } = useContext(UserContext);//
 
     const navigate = useNavigate();
 
@@ -17,7 +22,15 @@ const Log = () => {
         e.preventDefault();
         try {
             const res = await axios.post('http://localhost:4000/api/auth/login', formData, { withCredentials: true });
-            console.log(res.data);
+            console.log('Backend response:', res.data);
+
+
+            // username and useremail geting from the backend response
+            const { username, useremail } = res.data;//Destructure the needed data from the response
+            setUser({ username, useremail });// Set the user context
+
+            // Save user data to localStorage
+            localStorage.setItem('user', JSON.stringify({ username, useremail }));
 
             navigate('/home');
         } catch (err) {

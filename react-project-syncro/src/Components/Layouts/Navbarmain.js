@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState,useContext } from "react";
 import { Navbar, Nav, NavDropdown, Form, FormControl, InputGroup } from 'react-bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { FaBell, FaSearch } from "react-icons/fa";
@@ -9,6 +9,9 @@ import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 
 import Sidebar from "./SidebarHome";
+
+
+import { UserContext } from "../../contexts/UserContext";//import user name and email to the navbar
 
 function Navbarmain() {
   const [showSidebar, setShowSidebar] = useState(false);
@@ -30,6 +33,7 @@ function Navbarmain() {
       console.error(err.response?.data || err.message);
     }
   };
+  const { user } = useContext(UserContext);//adding user context
 
   return (
     <>
@@ -72,7 +76,7 @@ function Navbarmain() {
               id="basic-nav-dropdown"
               alignRight
             >
-              <NavDropdown.Item href="#profile">John John</NavDropdown.Item>
+              <NavDropdown.Item href="#profile">{user?.username}</NavDropdown.Item>
               <NavDropdown.Divider />
               <NavDropdown.Item onClick={handleLogout}>Log out</NavDropdown.Item>
             </NavDropdown>

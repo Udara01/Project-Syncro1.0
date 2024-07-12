@@ -20,7 +20,7 @@ function App() {
     <div className="App">
 
     <Routes>
-      <Route path='/' element={<Landing></Landing>}></Route>
+    <Route path='/' element={<Landing></Landing>}></Route>
       <Route path='/signup' element={<Register></Register>}></Route>
       <Route path='/login' element={<Login></Login>}></Route>
 
@@ -29,10 +29,9 @@ function App() {
       <Route path='/home' element={<DashboardHome></DashboardHome>}></Route>
       <Route path='/createProject' element={<CreateProject></CreateProject>}></Route>
       <Route path='/projects' element={<ProjectList></ProjectList>}></Route>
-      <Route path='/dashboard' element={<Dashboard></Dashboard>}></Route>
-      <Route path='/user' element={<UserSearch></UserSearch>}></Route>
-      
-</Route>
+      <Route path='/dashboard/:projectId' element={<Dashboard></Dashboard>}></Route>
+      <Route path='/user' element={<UserSearch></UserSearch>}></Route>   
+    </Route>
     </Routes>
     </div>
     
