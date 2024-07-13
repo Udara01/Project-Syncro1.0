@@ -20,7 +20,7 @@ const Register = () => {
             const res = await axios.post('http://localhost:4000/api/auth/register', formData, { withCredentials: true });
             console.log(res.data);
 
-            navigate('/home');
+            navigate('/login');
         } catch (err) {
             console.error(err.response.data);
         }
