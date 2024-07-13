@@ -1,0 +1,39 @@
+/* FileList.css */
+.file-list-container {
+  margin-top: 20px;
+}
+
+.file-list-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  margin-bottom: 5px;
+  transition: background-color 0.3s ease;
+}
+
+.file-list-item:hover {
+  background-color: #f1f1f1;
+}
+
+.file-info {
+  display: flex;
+  align-items: center;
+}
+
+.comments-btn {
+  margin-left: 10px;
+}
+
+.download-btn {
+  margin-left: auto;
+  text-decoration: none;
+  color: #007bff;
+  transition: color 0.3s ease;
+}
+
+.download-btn:hover {
+  color: #0056b3;
+}

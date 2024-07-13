@@ -1,0 +1,71 @@
+/* FileUpload.css */
+.file-upload-card {
+  width: 100%;
+  max-width: 500px;
+  margin: auto;
+  padding: 20px;
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.dropzone {
+  padding: 20px;
+  border: 2px dashed #007bff;
+  border-radius: 10px;
+  background-color: #f9f9f9;
+  text-align: center;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.dropzone p {
+  margin: 0;
+  color: #333;
+}
+
+.dropzone:hover {
+  background-color: #f1f1f1;
+}
+
+.description-textarea {
+  border-radius: 5px;
+  border: 1px solid #ddd;
+}
+
+.upload-btn {
+  background-color: #007bff;
+  border-color: #007bff;
+  transition: background-color 0.3s ease, border-color 0.3s ease;
+}
+
+.upload-btn:hover {
+  background-color: #0056b3;
+  border-color: #0056b3;
+}
+
+.cancel-btn {
+  background-color: #6c757d;
+  border-color: #6c757d;
+  transition: background-color 0.3s ease, border-color 0.3s ease;
+}
+
+.cancel-btn:hover {
+  background-color: #5a6268;
+  border-color: #5a6268;
+}
+
+/* Add styles for the file list */
+.file-list {
+  margin-top: 20px;
+}
+
+.file-list-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  margin-bottom: 5px;
+}

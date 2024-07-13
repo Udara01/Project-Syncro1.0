@@ -73,7 +73,8 @@ const cookieParser = require('cookie-parser'); // Add this
 const authRoutes = require('./Routers/auth');
 const projectCreate = require('./Routers/projectCreating');
 const userProjectsRoutes = require('./Routers/userProjects'); // get route for user projects
-
+const filesRoutes  = require('./Routers/files') // get route for user project file upload
+ 
 const app = express();
 const PORT = 4000;
 
@@ -88,13 +89,18 @@ app.use(cors({
 app.use(express.json());
 app.use(cookieParser()); // Use cookie-parser middleware
 app.use(express.urlencoded({ extended: true }));
+
+// Serve static files
 app.use('/uploads', express.static(path.join(__dirname, 'public/uploads')));//path for store project image
+app.use('/file', express.static(path.join(__dirname, 'public/file')));//path for store project image
+
 
 // Routers
 app.use('/api/auth', authRoutes);
-app.use('/api/projects', projectCreate); // Use the correct route for projects
-app.use('/api/userProjects', userProjectsRoutes); // Use the correct route for user projects
+app.use('/api/projects', projectCreate); //route for projects
+app.use('/api/userProjects', userProjectsRoutes); // route for user projects
 app.use('/api/users', authRoutes);
+app.use('/api/file', filesRoutes );//Route for the File
 
 // Start the server
 app.listen(PORT, () => {
