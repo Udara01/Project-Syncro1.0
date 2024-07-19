@@ -1,33 +1,55 @@
-/* Navbarmain.css */
+.custom-navbar {
+  background-color: #fff; /* Set background color */
+  border-bottom: 1px solid #ddd; /* Add bottom border */
+  padding: 0.5rem 1rem;
+}
 
-.navbarmain-container {
+.custom-navbar .navbar-brand {
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: #007bff; /* Set brand color */
+  margin-left: 20px;
+}
+
+.custom-navbar .navbar-nav .nav-link {
+  color: #333;
+  font-size: 1.2rem;
+  margin-right: 20px;
+}
+
+.custom-navbar .navbar-nav .nav-link:hover {
+  color: #007bff;
+}
+
+.custom-navbar .navbar-nav .nav-item .nav-link .fa {
+  font-size: 20px;
+}
+
+.custom-navbar .navbar-nav .nav-item .dropdown-menu {
+  right: 0;
+  left: auto;
+  text-align: center;
+}
+
+.custom-navbar .form-inline {
+  width: 100%;
+  max-width: 600px;
+  margin: 0 auto;
   position: relative;
 }
 
-.sidebar-overlay {
-  position: fixed;
-  top: 0;
-  left: -250px; /* Start off-screen */
-  width: 250px;
-  height: 100%;
-  background-color: #fff;
-  transition: left 0.3s ease-in-out;
-  z-index: 1000; /* Ensure sidebar appears above navbar */
+.custom-navbar .form-inline .form-control {
+  border-radius: 20px;
+  padding-right: 40px;
 }
 
-.sidebar-overlay.active {
-  left: 0; /* Slide in when active */
+.custom-navbar .form-inline .input-group-text {
+  position: absolute;
+  right: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  background: transparent;
+  border: none;
+  cursor: pointer;
 }
 
-/* Adjust padding for main content to avoid overlapping with sidebar */
-.navbarmain-container .navbar {
-  padding-left: 250px; /* Adjust based on sidebar width */
-}
-
-.navbarmain-container .navbar-collapse {
-  transition: padding-left 0.3s ease-in-out;
-}
-
-.navbarmain-container .navbar-collapse.collapse.show {
-  padding-left: 0; /* Reset padding when navbar collapses */
-}

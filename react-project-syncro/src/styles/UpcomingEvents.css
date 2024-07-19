@@ -1,0 +1,15 @@
+.meeting-indicator {
+  background-color: red;
+  color: white;
+  border-radius: 50%;
+  width: 10px;
+  height: 10px;
+  display: inline-block;
+}
+
+.meeting-details {
+  border: 3px solid #007bff;
+  padding: 10px;
+  margin-top: 10px;
+  border-radius: 5px;
+}

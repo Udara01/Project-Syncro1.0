@@ -20,6 +20,12 @@ import ProductOwnerPage from './Modules/Project/components/ProductOwnerPage'; //
 
 import RequirementUploadPage from './Modules/ProductOwner/Pages/RequirementUploadPage';
 
+import Meet from './Modules/VirtualMeeting/Components/meet'; //for the create and store virtual meeting
+
+import TeamMembers from './Modules/ProjectDashboard/Components/TeamMembers';//show allocated team members for the page
+
+import MeetingDetails from './Modules/VirtualMeeting/Components/MeetingDetails';//show the meeting details in a page
+
 
 
 function App() {
@@ -36,8 +42,15 @@ function App() {
       <Route path='/home' element={<DashboardHome></DashboardHome>}></Route>
       <Route path='/createProject' element={<CreateProject></CreateProject>}></Route>
       <Route path='/projects' element={<ProjectList></ProjectList>}></Route>
-      <Route path='/dashboard/:projectId' element={<Dashboard></Dashboard>}></Route>
+      <Route path='/dashboard/:projectId' element={<Dashboard></Dashboard>}></Route>{/*//route for the each project dashboard*/}
       <Route path='/user' element={<UserSearch></UserSearch>}></Route>   
+
+
+      <Route path='/projects/:projectId/add-meeting' element={<Meet />} />
+
+      <Route path='/projects/:projectId/team-members' element={<TeamMembers />} />
+
+      <Route path='/meetings' element={<MeetingDetails></MeetingDetails>}></Route>
 
 
 
@@ -52,14 +65,15 @@ function App() {
 {/*Role base access control test end*/}
 
       <Route path='/Prioritize-Requirements/:projectId' element={<PrivateRoute requiredRole="Project Owner" />}>
+
         <Route path='' element={<RequirementUploadPage />} />
       </Route>
 
-     {/* <Route path='/pioreq' element={<RequirementUploadPage></RequirementUploadPage>}></Route> */}
 
     </Route>
     </Routes>
     </div>
+    
     
   );
 }

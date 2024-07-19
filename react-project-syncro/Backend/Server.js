@@ -65,6 +65,8 @@ app.get('/', function(req, res) {
 
 */
 
+
+
 const express = require('express');
 const connectDB = require('./db');
 const cors = require('cors');
@@ -74,6 +76,8 @@ const authRoutes = require('./Routers/auth');
 const projectCreate = require('./Routers/projectCreating');
 const userProjectsRoutes = require('./Routers/userProjects'); // get route for user projects
 const filesRoutes  = require('./Routers/files') // get route for user project file upload
+const meetingRoutes  = require('./Routers/meeting')//get root for the virtual meeting
+const projectRoutes = require('./Routers/projectMember')//root for the get a project team members
  
 const app = express();
 const PORT = 4000;
@@ -102,10 +106,13 @@ app.use('/api/userProjects', userProjectsRoutes); // route for user projects
 app.use('/api/users', authRoutes);
 app.use('/api/file', filesRoutes );//Route for the File
 
-// Start the server
-app.listen(PORT, () => {
-  console.log(`Server is running on http://localhost:${PORT}`);
-});
+app.use('/api', meetingRoutes);
+app.use('/', meetingRoutes);
+
+app.use('/api', projectRoutes);
+
+
+
 
 app.get('/', function(req, res) {
   res.send(`<h1>Server is running on ${PORT}</h1>`);
@@ -126,3 +133,12 @@ app.get('/api/users', async (req, res) => {
     res.status(500).json({ message: 'Server error' });
   }
 });
+
+
+// Start the server
+app.listen(PORT, () => {
+  console.log(`Server is running on http://localhost:${PORT}`);
+});
+
+
+

@@ -1,0 +1,22 @@
+.container-vm {
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.meeting-details {
+  background-color: #f8f9fa;
+  border-left: 3px solid #007bff;
+}
+
+.meeting-details .card-title {
+  color: #343a40;
+  font-weight: bold;
+}
+
+.meeting-details .card-text {
+  color: #495057;
+}
+
+.meeting-details .btn {
+  width: 100%;
+}
