@@ -1,4 +1,4 @@
-/* Sidebar.css */
+/* Sidebar.css 
 
 .sidebar {
   height: 100%;
@@ -36,4 +36,91 @@
 
 .sidebar ul li a:hover {
   color: #f1f1f1;
+}
+
+*/
+
+
+.sidebar {
+  transition: width 0.3s ease;
+  background-color: #fff; /* Updated to match the image */
+  width: 300px; /* Adjust width as needed */
+  left: 0;
+  top: 56px;
+  transition: transform 0.3s ease-in-out;
+  transform: translateX(-0%);
+  z-index: 1000;
+  overflow-y: auto;
+  padding-bottom: 0;
+  border-right: 1px solid #ddd; /* Add border to separate sidebar */
+}
+
+.sidebar.open {
+  width: 250px; /* Adjust width as needed */
+}
+
+.sidebar.closed {
+  width: 0;
+  overflow: hidden;
+}
+
+.sidebar-sticky {
+  padding: 10px;
+}
+
+.user-section {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 20px;
+  margin-top: 20px;
+}
+
+.user-avatar {
+  width: 80px;
+  height: 80px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 10px;
+  background-color: #286db3; /* Adjusted to match your color theme */
+  color: #fff;
+  border-radius: 50%;
+}
+
+.user-info {
+  text-align: center;
+}
+
+.user-name {
+  font-size: 1.25rem;
+  font-weight: bold;
+}
+
+.user-email {
+  color: gray;
+}
+
+.nav-item {
+  margin-bottom: 10px;
+}
+
+/* Applying the specific sidebar styles */
+.sidebar .nav-item .nav-link {
+  color: #333; /* Adjust color to match the image */
+  padding: 10px 20px; /* Add padding for better spacing */
+  display: flex;
+  align-items: center;
+  width: 250px; /* Ensure full width */
+}
+
+.sidebar .nav-item .nav-link:hover,
+.sidebar .nav-item .nav-link.active {
+  background-color: #007bff; /* Highlight color on hover or active */
+  color: #fff;
+  border-radius: 5px;
+  width: 250px; /* Ensure full width */
+}
+.nav-item .nav-link .me-2 {
+  margin-right: 10px;
 }

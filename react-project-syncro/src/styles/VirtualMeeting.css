@@ -1,0 +1,16 @@
+.container-vm {
+  max-width: 800px;
+  margin: 0 auto; /* Centers the element horizontally */
+  text-align: center; /* Centers text and inline-block/inline elements within the container */
+  background-color: #f9f9f9; /* Optional: Add a background color for visual effect */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Optional: Add a box-shadow for better visibility */
+}
+
+
+.card-header {
+  text-align: center;
+}
+
+.form-control, .form-select {
+  margin-bottom: 25px;
+}

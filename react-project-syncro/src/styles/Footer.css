@@ -1,18 +1,27 @@
 .footer {
   background-color: #343a40; /* Dark background */
   color: #ffffff; /* Light text */
+  padding: 2rem 0;
+  bottom: 0;
+  width: 100%;
+}
+
+.footer-logo {
+  max-width: 150px;
 }
 
 .footer h3, .footer h4 {
   color: #ffffff; /* Light heading text */
+  margin-bottom: 1rem;
+  text-align: center;
 }
 
 .footer .form-control {
   width: auto;
-  display: inline-block;
+  margin-top: 22px; /* Adjust width to fit inline */
 }
 
-.footer .form-inline .mr-2 {
+.footer .me-2 {
   margin-right: 0.5rem;
 }
 
@@ -37,4 +46,15 @@
 .footer-bottom {
   border-top: 1px solid #555;
   padding-top: 1rem;
+  margin-top: 2rem;
+}
+
+.footer p {
+  margin-bottom: 0.5rem;
+  display: flex;
+  align-items: center;
+}
+
+.footer .me-2 {
+  margin-right: 0.5rem;
 }

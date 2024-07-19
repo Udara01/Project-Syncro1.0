@@ -1,6 +1,7 @@
 .App {
   text-align: center;
 }
+
 .card {
   margin: 20px;
 }
@@ -47,3 +48,22 @@
   padding: 10px 0;
 }
 
+.container.custom-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+.content {
+  margin-left: 250px;
+  margin-top: 56px;
+  padding: 20px;
+}
+
+.row {
+  margin: 0;
+}
+
+.col-md-4, .col-md-12 {
+  padding: 10px;
+}
