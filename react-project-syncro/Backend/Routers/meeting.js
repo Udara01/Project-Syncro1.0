@@ -104,9 +104,11 @@ const Meeting = require('../Modules/MeetingSchema');
 const Token = require('../Modules/TokenSchema'); // Import your Token schema
 const router = express.Router();
 
-const clientId = 'n2IKbhxEQ_SG1YbsKVkOIQ';
-const clientSecret = 'Nj1ylZhlJS63GuB3ZK6KVkJHHBc820OT';
-const redirectUri = 'http://localhost:4000/oauth/callback';
+require('dotenv').config(); // Load environment variables
+
+const clientId = process.env.CLIENT_ID;
+const clientSecret = process.env.CLIENT_SECRET;
+const redirectUri = process.env.REDIRECT_URI;
 
 // Redirect to Zoom OAuth authorization URL
 router.get('/authorize', (req, res) => {
