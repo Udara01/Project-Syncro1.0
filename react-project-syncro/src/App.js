@@ -5,6 +5,7 @@ import Landing from './Pages/Landing';//Landing page
 
 import Register from './Modules/Authentication/components/Register';
 import Login from './Modules/Authentication/components/Log';
+import ForgotPassword from './Modules/Authentication/components/ForgotPassword';//for the reset password
 import DashboardHome from './Modules/Home/Components/DashboardHome';
 
 import ProjectList from './Modules/Project/components/ProjectList';
@@ -36,7 +37,7 @@ function App() {
     <Route path='/' element={<Landing></Landing>}></Route>
       <Route path='/signup' element={<Register></Register>}></Route>
       <Route path='/login' element={<Login></Login>}></Route>
-
+      <Route path="/forgot-password" element={<ForgotPassword />} />
 
       <Route element={<PrivateRoute />}>
       <Route path='/home' element={<DashboardHome></DashboardHome>}></Route>
@@ -52,7 +53,7 @@ function App() {
 
       <Route path='/meetings' element={<MeetingDetails></MeetingDetails>}></Route>
 
-
+      
 
 {/*Role base access control test*/}
           <Route path='/project-planning/:projectId' element={<PrivateRoute requiredRole="Project Manager" />}>
