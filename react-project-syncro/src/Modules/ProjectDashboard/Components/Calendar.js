@@ -15,9 +15,9 @@ const events = [
 
 const CustomCalendar = () => {
   return (
-    <div className="card" style={{ width: '850px', height: '600px', margin: '0 auto' }}>
+    <div className="card" style={{ width: '700px', height: '600px', margin: '0 auto' }}>
       <div className="card-body" >
-      <div style={{ width: '800px', height: '330px', margin: '0 auto' }}>
+      <div style={{ width: '600px', height: '330px', margin: '0 auto' }}>
         <h5 className="card-title">Upcoming Event</h5>
         <Calendar
           localizer={localizer}

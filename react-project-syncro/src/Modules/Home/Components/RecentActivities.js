@@ -5,7 +5,7 @@ const RecentActivities = () => {
     return (
         <Card className="mb-4">
             <Card.Body>
-            <div style={{ width: '300px', height: '330px', margin: '0 auto' }}>
+            <div style={{ width: '200px', height: '330px', margin: '0 auto' }}>
                 <Card.Title>Recent Activities</Card.Title>
                 <ListGroup variant="flush">
                     <ListGroup.Item>

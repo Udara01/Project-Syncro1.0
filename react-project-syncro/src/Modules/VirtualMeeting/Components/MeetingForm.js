@@ -107,7 +107,7 @@ const MeetingForm = ({ onSubmit, projectId }) => {
       </div>
       <div className="mb-3">
         <label className="form-label">Team Members:</label>
-        <Team onSelectMember={handleSelectMember} projectId={projectId}/>
+        <Team onSelectMember={handleSelectMember} projectId={projectId} />
         <div className="mt-2">
           {selectedMembers.map((member, index) => (
             <span key={index} className="badge bg-secondary me-2">

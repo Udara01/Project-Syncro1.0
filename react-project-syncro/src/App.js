@@ -27,6 +27,8 @@ import TeamMembers from './Modules/ProjectDashboard/Components/TeamMembers';//sh
 
 import MeetingDetails from './Modules/VirtualMeeting/Components/MeetingDetails';//show the meeting details in a page
 
+import MeetingPage from './Modules/VirtualMeeting/pages/MeetingPage';//To create the meeting
+
 
 
 function App() {
@@ -53,6 +55,7 @@ function App() {
 
       <Route path='/meetings' element={<MeetingDetails></MeetingDetails>}></Route>
 
+      <Route path='/projects/:projectId/create-meeting' element={<MeetingPage></MeetingPage>}></Route>
       
 
 {/*Role base access control test*/}

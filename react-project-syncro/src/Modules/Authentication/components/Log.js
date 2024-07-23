@@ -66,7 +66,7 @@ const Log = () => {
                                 >Login</button>
                             </form>
                             <div className="mt-3 text-center">
-                                <button className="btn btn-link" style={{marginTop:'-10px', marginLeft:'350px', marginBottom:'20px'}}onClick={() => navigate('/forgot-password')}>
+                                <button className="btn btn-link" style={{marginTop:'-10px', marginLeft:'auto', marginBottom:'20px'}}onClick={() => navigate('/forgot-password')}>
                                     Forgot Password?
                                 </button>
 

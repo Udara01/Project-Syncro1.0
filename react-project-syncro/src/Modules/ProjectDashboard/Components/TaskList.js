@@ -3,6 +3,8 @@ import React from 'react';
 const TaskList = () => {
   const tasks = [
     { name: "Document Uploaded", description: "User Interface Design for the Home Page", due: "08/July" },
+    { name: "Document Uploaded", description: "User Interface Design for the Home Page", due: "08/July" },
+    { name: "Document Uploaded", description: "User Interface Design for the Home Page", due: "08/July" },
     // Add more tasks as needed
   ];
 
