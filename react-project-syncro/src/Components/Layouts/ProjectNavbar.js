@@ -28,7 +28,7 @@ const ProjectNavbar = ({ userRoles, projectId }) => { //in here projectNavbar is
             <Dropdown.Menu>
               <Dropdown.Item href="/requirements/requirement1">Business Analyst</Dropdown.Item>
               {userRoles.includes('Product Owner') && (
-              <Dropdown.Item as={Link} to={`/prioritize-requirements/${projectId}`}>Product Owner</Dropdown.Item>)}
+              <Dropdown.Item as={Link} to={`/prioritize-requirements/${projectId}`}>Prioritize Requirements</Dropdown.Item>)}
               <Dropdown.Item href="/requirements/requirement3">Requirement 3</Dropdown.Item>
             </Dropdown.Menu>
           </Dropdown>

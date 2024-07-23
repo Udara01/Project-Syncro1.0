@@ -1,0 +1,39 @@
+/* styles.css */
+
+
+.file-list-container {
+  background-color: #ffffff;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.file-list-container h4 {
+  margin-bottom: 20px;
+}
+
+.file-list-item {
+  padding: 10px 15px;
+  border-bottom: 1px solid #d1d9e0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.file-list-item:last-child {
+  border-bottom: none;
+}
+
+.file-list-item:hover {
+  background-color: #48a8e3;
+  cursor: pointer;
+}
+
+.file-list-item.selected {
+  background-color: #000000;
+}
+
+.upload-button {
+  margin-top: 10px;
+}
+

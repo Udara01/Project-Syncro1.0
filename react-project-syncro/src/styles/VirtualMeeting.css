@@ -1,16 +1,55 @@
 .container-vm {
-  max-width: 800px;
+  max-width: 1000px; /* Increase this value to expand the background width */
+  width: 90%; /* Set a width relative to the parent container if needed */
   margin: 0 auto; /* Centers the element horizontally */
   text-align: center; /* Centers text and inline-block/inline elements within the container */
   background-color: #f9f9f9; /* Optional: Add a background color for visual effect */
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Optional: Add a box-shadow for better visibility */
+  padding: 20px;
+  border-radius: 10px; /* Rounded corners */
 }
-
 
 .card-header {
   text-align: center;
 }
 
 .form-control, .form-select {
-  margin-bottom: 25px;
+  margin-bottom: 30px;
+}
+
+.main-container {
+  display: flex;
+  flex-grow: 1;
+}
+
+.sidebar-open .content {
+  margin-left:0px; /* Adjust this value based on your sidebar width */
+  margin-top: -0px;
+}
+
+.sidebar-closed .content {
+  margin-left: 0;
+}
+
+.content {
+  padding: 20px;
+  flex-grow: 1;
+  transition: margin-left 0.3s ease-in-out;
+}
+
+.btn-primary {
+  background-color: #007bff;
+  border-color: #007bff;
+  color: #fff;
+}
+
+.btn-primary:hover {
+  background-color: #0056b3;
+  border-color: #0056b3;
+}
+
+.custom-width {
+  max-width: 1500px; /* Increase the width as desired */
+  width: 100%;
+  margin: 0 auto;
 }

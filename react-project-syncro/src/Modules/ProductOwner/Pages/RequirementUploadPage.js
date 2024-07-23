@@ -1,11 +1,22 @@
 import React, { useState, useEffect } from 'react';
 import { Container, Row, Col } from 'react-bootstrap';
+import Navbarmain from '../../../Components/Layouts/Navbarmain';
+import Sidebar from '../../../Components/Layouts/SidebarHome';
+import Footer from '../../../Components/Layouts/Footer';
 import FileUpload from '../../Files/Components/FileUpload';
 import FileList from '../../Files/Components/FileList';
 import { useParams } from 'react-router-dom';
 import axios from 'axios';
+import '../../../styles/RequirementUploadPage.css';
 
 const RequirementUploadPage = () => {
+
+  const [isSidebarOpen, setIsSidebarOpen] = useState(true);
+
+  const toggleSidebar = () => {
+    setIsSidebarOpen(!isSidebarOpen);
+  };
+
   const { projectId } = useParams();
   const [requirementDocuments, setRequirementDocuments] = useState([]);
 
@@ -64,20 +75,29 @@ const RequirementUploadPage = () => {
   };
 
   return (
-    <Container>
-      <Row>
-        <Col>
-          <FileUpload onUpload={handleUpload} />
-        </Col>
-      </Row>
-      <Row className="mt-4">
-        <Col>
-          <FileList documents={requirementDocuments} onSelect={handleSelect} />
-        </Col>
-      </Row>
-    </Container>
+    <div className='PO'>
+      <Navbarmain toggleSidebar={toggleSidebar} isSidebarOpen={isSidebarOpen} />
+      <div className={`main-container ${isSidebarOpen ? 'sidebar-open' : 'sidebar-closed'}`}>
+        <Sidebar isSidebarOpen={isSidebarOpen} />
+
+        <div className="content">
+        <Container>
+          <Row>
+            <Col>
+              <FileUpload onUpload={handleUpload} />
+            </Col>
+          </Row>
+          <Row className="mt-4">
+            <Col>
+              <FileList documents={requirementDocuments} onSelect={handleSelect} />
+            </Col>
+          </Row>
+       </Container>
+        </div>
+    </div>
+      <Footer />
+    </div>
   );
 };
 
 export default RequirementUploadPage;
-

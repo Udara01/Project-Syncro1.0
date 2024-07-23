@@ -3,37 +3,25 @@
   margin-top: 20px;
 }
 
-.file-list-item {
+.file-card {
+  cursor: pointer;
+  transition: transform 0.2s;
+}
+
+.file-card:hover {
+  transform: scale(1.05);
+}
+
+.selected {
+  border: 2px solid #007bff;
+}
+
+.card-body {
   display: flex;
+  flex-direction: column;
   justify-content: space-between;
-  align-items: center;
-  padding: 10px;
-  border: 1px solid #ddd;
-  border-radius: 5px;
-  margin-bottom: 5px;
-  transition: background-color 0.3s ease;
 }
 
-.file-list-item:hover {
-  background-color: #f1f1f1;
-}
-
-.file-info {
-  display: flex;
-  align-items: center;
-}
-
-.comments-btn {
-  margin-left: 10px;
-}
-
-.download-btn {
-  margin-left: auto;
-  text-decoration: none;
-  color: #007bff;
-  transition: color 0.3s ease;
-}
-
-.download-btn:hover {
-  color: #0056b3;
+.comments-btn, .download-btn {
+  margin-top: 10px;
 }

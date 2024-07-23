@@ -64,7 +64,7 @@ const Sidebar = ({ isSidebarOpen, show, projectId }) => {
         {/* Add the meeting link if the projectId is available */}
         {actualProjectId && (
           <Nav.Item className="nav-item">
-            <Nav.Link href={`/projects/${actualProjectId}/add-meeting`} className="d-flex align-items-center">
+            <Nav.Link href={`/projects/${projectId}/create-meeting`} className="d-flex align-items-center">
               <TbBrandZoom className="me-2" />
               <span>Meeting</span>
             </Nav.Link>

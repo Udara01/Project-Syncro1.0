@@ -7,12 +7,12 @@ const QuickAccess = () => {
     return (
         <Card className="mb-4">
             <Card.Body>
-                <div style={{ width: '300px', height: '330px', margin: '0 auto' }}>
+                <div style={{ width: '200px', height: '330px', margin: '0 auto' }}>
                     <Card.Title>Quick Access</Card.Title>
                     <ListGroup variant="flush">
                         <ListGroup.Item>
                             <Link to="/projects" className="text-decoration-none">
-                                <FaProjectDiagram style={{ marginRight: '8px' }} /> My Projects
+                                <FaProjectDiagram style={{ marginRight: '0px' }} /> My Projects
                             </Link>
                         </ListGroup.Item>
                         <ListGroup.Item>
