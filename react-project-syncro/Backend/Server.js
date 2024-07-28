@@ -78,7 +78,11 @@ const userProjectsRoutes = require('./Routers/userProjects'); // get route for u
 const filesRoutes  = require('./Routers/files') // get route for user project file upload
 const meetingRoutes  = require('./Routers/meeting')//get root for the virtual meeting
 const projectRoutes = require('./Routers/projectMember')//root for the get a project team members
+const notificationRoutes = require('./Routers/notifications');//root for the notification
+const useremail = require('./Routers/user')
+
  
+const bodyParser = require('body-parser');
 const app = express();
 const PORT = 4000;
 
@@ -93,6 +97,7 @@ app.use(cors({
 app.use(express.json());
 app.use(cookieParser()); // Use cookie-parser middleware
 app.use(express.urlencoded({ extended: true }));
+app.use(bodyParser.json());
 
 // Serve static files
 app.use('/uploads', express.static(path.join(__dirname, 'public/uploads')));//path for store project image
@@ -111,7 +116,9 @@ app.use('/', meetingRoutes);
 
 app.use('/api', projectRoutes);
 
+app.use('/api/notifications', notificationRoutes);///Route for the notifications
 
+app.use('/api/users', useremail);
 
 
 app.get('/', function(req, res) {

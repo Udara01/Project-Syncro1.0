@@ -51,8 +51,7 @@ const DashboardHome = () => {
       <Navbarmain toggleSidebar={toggleSidebar} isSidebarOpen={isSidebarOpen} />
       <div className={`main-container ${isSidebarOpen ? 'sidebar-open' : 'sidebar-closed'}`}>
         <Sidebar isSidebarOpen={isSidebarOpen} />
-
-
+        
         <div className="content">
         <Row className="mb-4">
         <h1>Welcome to Syncro {user?.username}</h1>
