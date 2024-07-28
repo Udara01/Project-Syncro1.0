@@ -1,107 +1,11 @@
-/*
-const express = require('express');
-const axios = require('axios');
-const querystring = require('querystring');
-const Meeting = require('../Modules/MeetingSchema'); // Add this line
-const router = express.Router();
-
-const clientId = 'n2IKbhxEQ_SG1YbsKVkOIQ';
-const clientSecret = 'Nj1ylZhlJS63GuB3ZK6KVkJHHBc820OT';
-const redirectUri = 'http://localhost:4000/oauth/callback';
-
-let accessToken = ''; // In-memory store for demo purposes; use a database for production
-
-// Redirect to Zoom OAuth authorization URL
-router.get('/authorize', (req, res) => {
-  const authorizationUrl = `https://zoom.us/oauth/authorize?client_id=${clientId}&response_type=code&redirect_uri=${encodeURIComponent(redirectUri)}`;
-  res.redirect(authorizationUrl);
-});
-
-// OAuth callback to exchange code for access token
-router.get('/oauth/callback', async (req, res) => {
-  const authorizationCode = req.query.code;
-
-  try {
-    const tokenResponse = await axios.post('https://zoom.us/oauth/token', querystring.stringify({
-      grant_type: 'authorization_code',
-      code: authorizationCode,
-      redirect_uri: redirectUri
-    }), {
-      headers: {
-        Authorization: 'Basic ' + Buffer.from(`${clientId}:${clientSecret}`).toString('base64'),
-        'Content-Type': 'application/x-www-form-urlencoded'
-      }
-    });
-
-    accessToken = tokenResponse.data.access_token;
-    res.redirect('http://localhost:3000'); // Redirect back to the frontend
-  } catch (error) {
-    res.status(500).send(error.message);
-  }
-});
-
-// Endpoint to get the stored access token
-router.get('/accessToken', (req, res) => {
-  res.json({ accessToken });
-});
-
-// Create a Zoom meeting and save to MongoDB
-router.post('/createMeeting', async (req, res) => {
-  const { topic, start_time, duration, timezone, members,projectId } = req.body;
-
-  const meetingConfig = {
-    topic,
-    type: 2, // Scheduled meeting
-    start_time,
-    duration,
-    timezone,
-    projectId
-  };
-
-  try {
-    const response = await axios.post(
-      'https://api.zoom.us/v2/users/me/meetings',
-      meetingConfig,
-      { headers: { Authorization: `Bearer ${accessToken}` } }
-    );
-
-    // Save meeting details to MongoDB
-    const newMeeting = new Meeting({
-      topic,
-      start_time,
-      duration,
-      timezone,
-      join_url: response.data.join_url,
-      members,
-      projectId
-    });
-
-    await newMeeting.save();
-
-    res.json(newMeeting);
-  } catch (error) {
-    console.error('Error creating Zoom meeting:', error.response ? error.response.data : error.message);
-    res.status(500).send(error.response ? error.response.data : error.message);
-  }
-});
-
-// Fetch all meetings
-router.get('/meetings', async (req, res) => {
-  try {
-      const meetings = await Meeting.find();
-      res.json(meetings);
-  } catch (err) {
-      res.status(500).json({ error: 'Error fetching meetings' });
-  }
-});
-
-module.exports = router;*/
-
 const express = require('express');
 const axios = require('axios');
 const querystring = require('querystring');
 const Meeting = require('../Modules/MeetingSchema');
 const Token = require('../Modules/TokenSchema'); // Import your Token schema
+const User = require('../Modules/UserSchema'); // Import your User schema
+const Project = require('../Modules/projectSchema'); // Import your Project schema
+const { createNotification } = require('../Utils/NotificationUtils'); // Import the notification service
 const router = express.Router();
 
 require('dotenv').config(); // Load environment variables
@@ -237,6 +141,21 @@ router.post('/createMeeting', async (req, res) => {
 
       await newMeeting.save();
 
+      // Get the project name using the projectId
+      const project = await Project.findById(projectId);
+      const projectName = project ? project.projectName : 'Unknown Project';
+
+      // Create notifications for each member
+      for (const memberEmail of members) {
+        const user = await User.findOne({ email: memberEmail });
+        if (user) {
+          const message = `A new meeting for project "${projectName}" has been scheduled: ${topic}`;
+          await createNotification(user._id, 'meeting', message);
+        } else {
+          console.error(`User with email ${memberEmail} not found`);
+        }
+      }
+
       res.json(newMeeting);
     } catch (error) {
       if (error.response && error.response.data.code === 124) {
@@ -262,6 +181,22 @@ router.post('/createMeeting', async (req, res) => {
         });
 
         await newMeeting.save();
+
+        // Get the project name using the projectId
+        const project = await Project.findById(projectId);
+        const projectName = project ? project.projectName : 'Unknown Project';
+
+        // Create notifications for each member
+        for (const memberEmail of members) {
+          const user = await User.findOne({ email: memberEmail });
+          if (user) {
+            const message = `A new meeting for project "${projectName}" has been scheduled: ${topic}`;
+            await createNotification(user._id, 'meeting', message);
+          } else {
+            console.error(`User with email ${memberEmail} not found`);
+          }
+        }
+
 
         res.json(newMeeting);
       } else {

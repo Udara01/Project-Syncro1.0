@@ -1,6 +1,9 @@
 import './App.css';
 import { Routes, Route } from "react-router-dom";
 
+
+
+
 import Landing from './Pages/Landing';//Landing page
 
 import Register from './Modules/Authentication/components/Register';
@@ -29,6 +32,9 @@ import MeetingDetails from './Modules/VirtualMeeting/Components/MeetingDetails';
 
 import MeetingPage from './Modules/VirtualMeeting/pages/MeetingPage';//To create the meeting
 
+import Notifications from './Modules/Notification/Components/Notifications';//To fetch the notifications and mark as read
+import CreateNotification from './Modules/Notification/Components/CreateNotification';//just check one no need
+
 
 
 function App() {
@@ -56,6 +62,10 @@ function App() {
       <Route path='/meetings' element={<MeetingDetails></MeetingDetails>}></Route>
 
       <Route path='/projects/:projectId/create-meeting' element={<MeetingPage></MeetingPage>}></Route>
+
+      <Route path='/notification' element={<Notifications ></Notifications >}></Route>
+      <Route path='/create-notification' element={<CreateNotification />} />
+      
       
 
 {/*Role base access control test*/}

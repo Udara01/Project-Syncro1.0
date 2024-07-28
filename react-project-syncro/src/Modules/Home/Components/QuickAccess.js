@@ -30,6 +30,11 @@ const QuickAccess = () => {
                                 <FaFileAlt style={{ marginRight: '8px' }} /> My Files
                             </Link>
                         </ListGroup.Item>
+                        <ListGroup.Item>
+                            <Link to="/notification" className="text-decoration-none">
+                                <FaFileAlt style={{ marginRight: '8px' }} /> My Notification
+                            </Link>
+                        </ListGroup.Item>
                     </ListGroup>
                 </div>
             </Card.Body>

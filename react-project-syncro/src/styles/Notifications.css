@@ -1,0 +1,36 @@
+.notifications-container {
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 2rem;
+  background-color: #fff;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.notifications-container .list-group-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.notifications-container .list-group-item .d-flex {
+  display: flex;
+  align-items: center;
+}
+
+.notifications-container .list-group-item .d-flex span {
+  margin-left: 0.5rem;
+}
+
+.notifications-container .list-group-item.read {
+  background-color: #f8f9fa;
+}
+
+.notifications-container .list-group-item.unread {
+  background-color: #e9ecef;
+}
+
+.notifications-container .list-group-item .text-muted {
+  font-size: 0.9rem;
+}
+
