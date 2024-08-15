@@ -66,8 +66,6 @@ function App() {
       <Route path='/notification' element={<Notifications ></Notifications >}></Route>
       <Route path='/create-notification' element={<CreateNotification />} />
       
-      
-
 {/*Role base access control test*/}
           <Route path='/project-planning/:projectId' element={<PrivateRoute requiredRole="Project Manager" />}>
             <Route path='' element={<ProjectPlanning />} />

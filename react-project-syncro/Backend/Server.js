@@ -4,7 +4,16 @@ const cors = require('cors');
 const path = require('path');
 const cookieParser = require('cookie-parser'); // Add this
 const authRoutes = require('./Routers/auth');
+const projectCreate = require('./Routers/projectCreating');
+const userProjectsRoutes = require('./Routers/userProjects'); // get route for user projects
+const filesRoutes  = require('./Routers/files') // get route for user project file upload
+const meetingRoutes  = require('./Routers/meeting')//get root for the virtual meeting
+const projectRoutes = require('./Routers/projectMember')//root for the get a project team members
+const notificationRoutes = require('./Routers/notifications');//root for the notification
+const useremail = require('./Routers/user')
 
+ 
+const bodyParser = require('body-parser');
 const app = express();
 const PORT = 4000;
 
@@ -18,26 +27,36 @@ app.use(cors({
 }));
 app.use(express.json());
 app.use(cookieParser()); // Use cookie-parser middleware
+app.use(express.urlencoded({ extended: true }));
+app.use(bodyParser.json());
+
+// Serve static files
+app.use('/uploads', express.static(path.join(__dirname, 'public/uploads')));//path for store project image
+app.use('/file', express.static(path.join(__dirname, 'public/file')));//path for store project image
+
 
 // Routers
+app.use('/api/auth', authRoutes);
+app.use('/api/projects', projectCreate); //route for projects
+app.use('/api/userProjects', userProjectsRoutes); // route for user projects
+app.use('/api/users', authRoutes);
+app.use('/api/file', filesRoutes );//Route for the File
 
-app.use('/api/auth', authRoutes);//For the authentication
+app.use('/api', meetingRoutes);
+app.use('/', meetingRoutes);
 
-const projectCreate = require('./Routers/projectCreating');
-app.use('/createP', projectCreate);
+app.use('/api', projectRoutes);
 
-app.use(express.urlencoded({ extended: true }));
-app.use('/uploads', express.static(path.join(__dirname, 'public/uploads')));
+app.use('/api/notifications', notificationRoutes);///Route for the notifications
 
-
-// Include your routes here
-const projectRouter = require('./Routers/projectCreating');
-app.use('/api', projectRouter);
-
-app.use('/api/projects', projectRouter);
+app.use('/api/users', useremail);
 
 
-////////////////////
+app.get('/', function(req, res) {
+  res.send(`<h1>Server is running on ${PORT}</h1>`);
+});
+
+
 const User = require('./Modules/UserSchema')
 app.get('/api/users', async (req, res) => {
   try {
@@ -58,13 +77,7 @@ app.get('/api/users', async (req, res) => {
 app.listen(PORT, () => {
   console.log(`Server is running on http://localhost:${PORT}`);
 });
-
-app.get('/', function(req, res) {
-  res.send(`<h1>Server is running on ${PORT}</h1>`);
-});
-
 */
-
 
 
 const express = require('express');
@@ -146,6 +159,5 @@ app.get('/api/users', async (req, res) => {
 app.listen(PORT, () => {
   console.log(`Server is running on http://localhost:${PORT}`);
 });
-
 
 

@@ -15,10 +15,10 @@ const Sidebar = ({ isSidebarOpen, show, projectId }) => {
 
   const { user } = useContext(UserContext);
   const params = useParams();
-  const actualProjectId = projectId || params.projectId; // Get projectId from params if not provided via props
+  const actualProjectId = projectId || params.projectId; // Get projectId from params if not provided via props 
 
-  console.log('User context in Sidebar:', user); // Debugging log
 
+  
   return (
  <Nav className={`sidebar ${isSidebarOpen ? 'open' : 'closed'}`}>
       <div className="sidebar-sticky">
