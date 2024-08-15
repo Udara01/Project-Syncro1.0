@@ -172,12 +172,12 @@ router.post('/login', async (req, res) => {
         const user = await User.findOne({ email });
         if (!user) {
             console.error('Invalid credentials: User not found for email:', email);
-            return res.status(400).json({ msg: 'Invalid credentials' });
+            return res.status(400).json({ msg: `The email address you entered is not registered.` });
         }
         const isMatch = await user.matchPassword(password);
         if (!isMatch) {
             console.error('Invalid credentials: Password mismatch for email:', email);
-            return res.status(400).json({ msg: 'Invalid credentials' });
+            return res.status(400).json({ msg: 'The password you entered is incorrect.' });
         }
 
         const payload = { userId: user._id };

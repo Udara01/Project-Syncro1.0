@@ -10,6 +10,7 @@ const Log = () => {
     const { email, password } = formData;
     const { setUser } = useContext(UserContext);
     const navigate = useNavigate();
+    const [error, setError] = useState('');
 
     const onChange = e => setFormData({ ...formData, [e.target.name]: e.target.value });
 
@@ -22,7 +23,7 @@ const Log = () => {
             setUser({ username, useremail, userId  });
             localStorage.setItem('user', JSON.stringify({ username, useremail, userId  }));
             navigate('/home');*/
-            const res = await axios.post('http://localhost:4000/api/auth/login', { ...formData, email: email.toLowerCase() }, { withCredentials: true });
+        const res = await axios.post('http://localhost:4000/api/auth/login', { ...formData, email: email.toLowerCase() }, { withCredentials: true });
         console.log('Backend response:', res.data);
         const { username, useremail, userId  } = res.data; // Updated to extract _id
         const user = { username, useremail, userId };
@@ -32,6 +33,7 @@ const Log = () => {
         navigate('/home');
         } catch (err) {
             console.error(err.response.data);
+            setError(err.response.data.msg || 'An error occurred');
         }
     };
 
@@ -42,6 +44,7 @@ const Log = () => {
                     <div className="card">
                         <div className="card-body">
                             <h3 className="card-title text-center mb-4">Login</h3>
+                            {error && <div className="alert alert-danger">{error}</div>}
                             <form onSubmit={onSubmit}>
                                 <div className="mb-3">
                                     <label htmlFor="email" className="form-label">Email</label>
