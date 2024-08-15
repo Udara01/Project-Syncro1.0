@@ -1,5 +1,5 @@
 import './App.css';
-import { Routes, Route } from "react-router-dom";
+import { Routes, Route, useParams} from "react-router-dom";
 
 
 
@@ -36,6 +36,8 @@ import Notifications from './Modules/Notification/Components/Notifications';//To
 import CreateNotification from './Modules/Notification/Components/CreateNotification';//just check one no need
 
 
+import ProjectDetails from './cha_Files/Components/ProjectDetails';
+import TaskDashboard from './Modules/ProjectManager/Components/TaskDashboard';
 
 function App() {
   return (
@@ -60,6 +62,7 @@ function App() {
       <Route path='/projects/:projectId/team-members' element={<TeamMembers />} />
 
       <Route path='/meetings' element={<MeetingDetails></MeetingDetails>}></Route>
+      <Route path='/projects/:projectId/details' element={<ProjectDetails></ProjectDetails>}></Route>
 
       <Route path='/projects/:projectId/create-meeting' element={<MeetingPage></MeetingPage>}></Route>
 
@@ -67,6 +70,10 @@ function App() {
       <Route path='/create-notification' element={<CreateNotification />} />
       
       
+      <Route path='/projects/:projectId/create-task' element={<TaskDashboard />} />
+
+
+
 
 {/*Role base access control test*/}
           <Route path='/project-planning/:projectId' element={<PrivateRoute requiredRole="Project Manager" />}>

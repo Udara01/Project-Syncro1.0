@@ -1,0 +1,14 @@
+/* src/styles/subnavbar.css */
+.project-manager-subnavbar-container {
+  margin-bottom: 20px;
+}
+
+.nav-link {
+  color: #000;
+  font-weight: bold;
+}
+
+.nav-link.active {
+  color: #007bff;
+  background-color: #f8f9fa;
+}

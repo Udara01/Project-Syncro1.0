@@ -1,0 +1,17 @@
+/* TaskDashboard.css */
+.bg-success {
+    background-color: #28a745 !important;
+  }
+  
+  .text-white {
+    color: white !important;
+  }
+  
+  button {
+    margin-top: 20px;
+  }
+  
+  .container {
+    padding: 20px;
+  }
+  

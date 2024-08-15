@@ -13,6 +13,7 @@ import FileUpload from '../Components/FileUpload';
 import TeamMembers from '../Components/TeamMembers';
 import { UserContext } from '../../../contexts/UserContext'; // Import UserContext
 import '../../../styles/ProjectDashboard.css';
+import PMSubNavbar from '../../../Components/Layouts/PMSubNavbar';
 
 function Dashboard() {
   const [isSidebarOpen, setIsSidebarOpen] = useState(true);
@@ -72,6 +73,15 @@ function Dashboard() {
         <div className="content" style={{ marginLeft: isSidebarOpen ? '0px' : '-10px', marginTop: '56px', padding: '20px' }}>
           <ProjectNavbar userRoles={userRoles} projectId={projectId} /> {/* Pass userRoles and projectId as props to the ProjectNavbar */}
 
+          {/* Conditionally render the ProjectManagerSubNavbar if the user is a Project Manager */}
+          {userRoles.includes('Project Manager') && (
+            <PMSubNavbar projectId={projectId} />
+          )}
+
+          <h1>{project.projectName}</h1>
+          <p>Roles: {userRoles.join(' | ')}</p> {/* Display all user roles */}
+
+
           {/* Role-based access control test */}
           {userRoles.includes('Project Manager') && (
             <Link to={`/project-planning/${projectId}`}>Go to Project Planning</Link>
@@ -85,6 +95,10 @@ function Dashboard() {
           <Link to={`/projects/${projectId}/add-meeting`}>Create a New Meeting</Link>
 
           <Link to={`/projects/${projectId}/create-meeting`}>Create a New Meeting2</Link>
+
+          <br /><Link to={`/projects/${projectId}/details`}>ProjectDetails</Link>
+          
+          <p>Project ID: {projectId}</p>
 
           <div className="container">
             <div className="row">

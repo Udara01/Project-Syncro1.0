@@ -81,6 +81,8 @@ const projectRoutes = require('./Routers/projectMember')//root for the get a pro
 const notificationRoutes = require('./Routers/notifications');//root for the notification
 const useremail = require('./Routers/user')
 
+const ProjectDetails = require ('./Routers/projects')
+const taskRoutes = require('./Routers/mainTask');
  
 const bodyParser = require('body-parser');
 const app = express();
@@ -115,6 +117,10 @@ app.use('/api', meetingRoutes);
 app.use('/', meetingRoutes);
 
 app.use('/api', projectRoutes);
+app.use('/api/projects', ProjectDetails); // Route for getting project details by ID
+app.use('/api/tasks', taskRoutes);
+
+
 
 app.use('/api/notifications', notificationRoutes);///Route for the notifications
 
