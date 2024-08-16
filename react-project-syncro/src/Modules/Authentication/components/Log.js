@@ -30,6 +30,10 @@ const Log = () => {
         console.log('User data being set:', user); // Debugging log
         setUser(user);
         localStorage.setItem('user', JSON.stringify(user));
+
+        // Call the backend time tracking endpoint
+        await axios.post('http://localhost:4000/api/time-tracking', { userId });
+
         navigate('/home');
         } catch (err) {
             console.error(err.response.data);

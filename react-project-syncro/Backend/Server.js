@@ -93,6 +93,7 @@ const meetingRoutes  = require('./Routers/meeting')//get root for the virtual me
 const projectRoutes = require('./Routers/projectMember')//root for the get a project team members
 const notificationRoutes = require('./Routers/notifications');//root for the notification
 const useremail = require('./Routers/user')
+const timeTracking = require('./Routers/timeTracking')
 
  
 const bodyParser = require('body-parser');
@@ -133,6 +134,7 @@ app.use('/api/notifications', notificationRoutes);///Route for the notifications
 
 app.use('/api/users', useremail);
 
+app.use('/api', timeTracking);
 
 app.get('/', function(req, res) {
   res.send(`<h1>Server is running on ${PORT}</h1>`);

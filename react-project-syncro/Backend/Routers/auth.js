@@ -191,11 +191,6 @@ router.post('/login', async (req, res) => {
     }
 });
 
-//Logout Process
-router.post('/logout', (req, res) => {
-    res.clearCookie('token');
-    res.status(200).json({ message: 'Logged out successfully' });
-});
 
 const authMiddleware = (req, res, next) => {
     const token = req.cookies.token;
@@ -210,6 +205,13 @@ const authMiddleware = (req, res, next) => {
         res.status(401).json({ msg: 'Token is not valid' });
     }
 };
+
+//Logout Process
+router.post('/logout', (req, res) => {
+    res.clearCookie('token');
+    res.status(200).json({ message: 'Logged out successfully' });
+});
+
 
 router.get('/protected', authMiddleware, (req, res) => {
     res.status(200).json({ msg: 'This is a protected route' });
