@@ -14,8 +14,7 @@ const Navbarmain = ({ toggleSidebar, isSidebarOpen }) => {
   const [unreadCount, setUnreadCount] = useState(0);
   const [notifications, setNotifications] = useState([]);
   const navigate = useNavigate();
-  const { user } = useContext(UserContext);
-
+  const { user, setUser } = useContext(UserContext);
   useEffect(() => {
 
 //fetching notifications for the corresponding user
@@ -40,13 +39,35 @@ const Navbarmain = ({ toggleSidebar, isSidebarOpen }) => {
   };
 
   const handleLogout = async () => {
-    try {
-      await axios.post('http://localhost:4000/api/auth/logout', {}, { withCredentials: true });
-      navigate('/login'); // Redirect to login page
-    } catch (err) {
-      console.error(err.response?.data || err.message);
+    if (!user) {
+      console.error('User context is null. Unable to logout.');
+      navigate('/');
+      return;
     }
-  };
+  
+    try {
+      const userId = user.userId;
+      console.log(`Logging out user with ID: ${userId}`);
+      
+      // Log the time out
+      await axios.post('http://localhost:4000/api/time-out', { userId }, { withCredentials: true });
+
+
+      console.log('Time out logged successfully.');
+  
+      // Clear the session and log out
+      await axios.post('http://localhost:4000/api/auth/logout', {}, { withCredentials: true });
+      console.log('User logged out successfully.');
+  
+      // Clear user context and local storage
+      setUser(null);
+      localStorage.removeItem('user');
+  
+      navigate('/'); // Redirect to login page
+    } catch (err) {
+      console.error('Logout error:', err.response?.data || err.message);
+    }
+  };  
 
 
 //mark as notification read logic
