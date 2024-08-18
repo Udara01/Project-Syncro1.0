@@ -39,6 +39,10 @@ import CreateNotification from './Modules/Notification/Components/CreateNotifica
 import ProjectDetails from './cha_Files/Components/ProjectDetails';
 import TaskDashboard from './Modules/ProjectManager/pages/TaskDashboard';
 
+import TeamManagement from './Modules/ProjectManager/pages/TeamManagement';
+
+
+
 function App() {
   return (
     <div className="App">
@@ -71,7 +75,10 @@ function App() {
       
       
       <Route path='/projects/:projectId/create-task' element={<TaskDashboard />} />
+  
+      <Route path="/projects/:projectId/team-management" component={TeamManagement} />
 
+      
 
 
 

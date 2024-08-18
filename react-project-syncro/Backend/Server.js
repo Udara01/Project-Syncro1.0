@@ -81,8 +81,13 @@ const projectRoutes = require('./Routers/projectMember')//root for the get a pro
 const notificationRoutes = require('./Routers/notifications');//root for the notification
 const useremail = require('./Routers/user')
 
+
+
 const ProjectDetails = require ('./Routers/projects')
 const taskRoutes = require('./Routers/mainTask');
+
+const teamManagementRoutes = require('./Routers/team');
+
  
 const bodyParser = require('body-parser');
 const app = express();
@@ -96,6 +101,7 @@ app.use(cors({
     origin: 'http://localhost:3000',
     credentials: true
 }));
+
 app.use(express.json());
 app.use(cookieParser()); // Use cookie-parser middleware
 app.use(express.urlencoded({ extended: true }));
@@ -119,6 +125,11 @@ app.use('/', meetingRoutes);
 app.use('/api', projectRoutes);
 app.use('/api/projects', ProjectDetails); // Route for getting project details by ID
 app.use('/api/tasks', taskRoutes);
+
+
+// Team Management Routes
+app.use('/api/team-management', teamManagementRoutes); 
+
 
 
 
@@ -146,6 +157,7 @@ app.get('/api/users', async (req, res) => {
     res.status(500).json({ message: 'Server error' });
   }
 });
+
 
 
 // Start the server

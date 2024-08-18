@@ -1,0 +1,11 @@
+{
+  "name": "project-syncro1.0",
+  "version": "1.0.0",
+  "description": "A comprehensive system for project and remote work management, featuring task tracking, milestone management, team collaboration, time tracking, virtual meetings, productivity analysis, and user management. Built with Node.js/Express, React.js, MongoDB, and video conferencing APIs to enhance team productivity and communication.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC"
+}

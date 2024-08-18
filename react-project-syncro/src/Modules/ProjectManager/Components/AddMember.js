@@ -1,24 +1,26 @@
-import React, { useState } from 'react';
+import React from 'react';
+import { useParams } from 'react-router-dom';
+
+
 import axios from 'axios';
 
-const AddMember = ({ teamId }) => {
-    const [name, setName] = useState('');
+const AddMember = () => {
+    const { teamId } = useParams(); // Get teamId from URL params
 
-    const addMember = () => {
-        axios.post(`/api/teams/${teamId}/members`, { name }).then(response => {
+    const addMember = async (memberData) => {
+        try {
+            const response = await axios.post(`http://localhost:3000/api/teams/${teamId}/members`, memberData);
             console.log('Member added:', response.data);
-        });
+        } catch (error) {
+            console.error('Error adding member:', error);
+        }
     };
 
+    
     return (
         <div>
-            <input 
-              type="text" 
-              value={name} 
-              onChange={(e) => setName(e.target.value)} 
-              placeholder="Search Member" 
-            />
-            <button onClick={addMember}>Add</button>
+            {/* Form or UI to add member */}
+            <button onClick={() => addMember({ name: 'New Member' })}>Add Member</button>
         </div>
     );
 };

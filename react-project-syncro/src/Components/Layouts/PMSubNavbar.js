@@ -3,7 +3,7 @@ import React from 'react';
 import { Nav } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import '../../styles/pmsubnavbar.css'; // You can create a custom CSS file for the sub-navbar
+import '../../styles/pmsubnavbar.css'; // Custom CSS for the sub-navbar
 
 const PMSubNavbar = ({ projectId }) => {
   return (
@@ -17,6 +17,12 @@ const PMSubNavbar = ({ projectId }) => {
         <Nav.Item>
           <Nav.Link as={Link} to={`/projects/${projectId}/create-task`}>
             Create Task
+          </Nav.Link>
+        </Nav.Item>
+        {/* Add Team Management Tab */}
+        <Nav.Item>
+          <Nav.Link as={Link} to={`/projects/${projectId}/team-management`}>
+            Team Management
           </Nav.Link>
         </Nav.Item>
       </Nav>

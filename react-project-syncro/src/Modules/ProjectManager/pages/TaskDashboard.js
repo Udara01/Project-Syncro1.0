@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState } from 'react';
 import { useParams } from "react-router-dom";
 import axios from 'axios';
 import { Container, Row, Col, Table, Form, Button, Card, Modal } from "react-bootstrap";
@@ -37,6 +37,7 @@ const TaskDashboard = () => {
   const createTask = async (taskData) => {
     try {
       const response = await axios.post(`http://localhost:4000/api/tasks/${projectId}/create`, taskData);
+
       console.log('Task created:', response.data);
     } catch (error) {
       console.error('Error creating task:', error);

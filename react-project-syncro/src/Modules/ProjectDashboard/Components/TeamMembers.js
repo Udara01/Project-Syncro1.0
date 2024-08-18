@@ -1,9 +1,7 @@
 import React, { useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
 import axios from 'axios';
 
-const TeamMembers = () => {
-  const { projectId } = useParams();
+const TeamMembers = ({ projectId }) => {
   const [members, setMembers] = useState([]);
   const [error, setError] = useState('');
 
@@ -45,6 +43,3 @@ const TeamMembers = () => {
 };
 
 export default TeamMembers;
-
-
-
