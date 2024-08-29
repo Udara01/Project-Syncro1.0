@@ -2,6 +2,7 @@
   background-color: #fff; /* Set background color */
   border-bottom: 1px solid #ddd; /* Add bottom border */
   padding: 0.5rem 1rem;
+  width: 10px;
 }
 
 .custom-navbar .navbar-brand {

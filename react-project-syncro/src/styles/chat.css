@@ -1,0 +1,205 @@
+/* src/ChatApp.css */
+.chat-app {
+    display: flex;
+    height: 100vh;
+    width: 100%;
+    background-color: #ece5dd;
+  }
+  
+  .sidebar {
+    width: 30%;
+    background-color: #f8f8f8;
+    border-right: 1px solid #ddd;
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .sidebar-header {
+    padding: 15px;
+    background-color: #075e54;
+    color: white;
+  }
+  
+  .sidebar-chats {
+    flex: 1;
+    overflow-y: auto;
+  }
+  
+  .sidebar-chat {
+    padding: 15px;
+    cursor: pointer;
+    border-bottom: 1px solid #ddd;
+  }
+  
+  .sidebar-chat:hover {
+    background-color: #f1f1f1;
+  }
+  
+  .chat-window {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .chat-header {
+    padding: 15px;
+    background-color: #075e54;
+    color: white;
+  }
+  
+  .chat-body {
+    flex: 1;
+    padding: 15px;
+    background-color: #e5ddd5;
+    overflow-y: auto;
+  }
+  
+  .chat-footer {
+    padding: 10px;
+    background-color: #fff;
+    display: flex;
+    align-items: center;
+  }
+  
+  .chat-footer input {
+    flex: 1;
+    padding: 10px;
+    border-radius: 20px;
+    border: 1px solid #ddd;
+  }
+  
+  .chat-footer button {
+    padding: 10px 15px;
+    margin-left: 10px;
+    background-color: #075e54;
+    color: white;
+    border: none;
+    border-radius: 20px;
+    cursor: pointer;
+  }
+  
+  .message {
+    max-width: 60%;
+    margin: 10px 0;
+    padding: 10px 15px;
+    border-radius: 10px;
+    background-color: #dcf8c6;
+  }
+  
+  .message.user {
+    align-self: flex-end;
+    background-color: #dcf8c6;
+  }
+  
+  .message.bot {
+    align-self: flex-start;
+    background-color: #ffffff;
+  }
+
+  .profile-photo {
+    width: 40px; /* Adjust size as needed */
+    height: 40px;
+    border-radius: 50%;
+    margin-right: 10px;
+    object-fit: cover;
+  }
+  
+  .sidebar-chat {
+    display: flex;
+    align-items: center;
+    padding: 10px;
+    cursor: pointer;
+  }
+  
+  .message {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+  }
+  
+  .message-content {
+    background-color: #f1f1f1;
+    padding: 10px;
+    border-radius: 8px;
+    position: relative;
+    max-width: 70%;
+  }
+  
+  .delete-button {
+    position: absolute;
+    top: 50%;
+    right: 10px;
+    transform: translateY(-50%);
+    background-color: transparent;
+    border: none;
+    color: red;
+    cursor: pointer;
+    font-size: 12px;
+  }
+  
+  .delete-button:hover {
+    color: darkred;
+  }
+
+  .message {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+    position: relative;
+  }
+  
+  .message-content {
+    background-color: #f1f1f1;
+    padding: 10px;
+    border-radius: 8px;
+    max-width: 70%;
+    position: relative;
+  }
+  
+  .profile-photo {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    margin-right: 10px;
+    object-fit: cover;
+  }
+  
+  .options {
+    position: relative;
+    display: inline-block;
+  }
+  
+  .options-button {
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-size: 18px;
+  }
+  
+  .options-popup {
+    position: absolute;
+    top: 20px;
+    right: 0;
+    background-color: white;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    padding: 5px 10px;
+    box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.2);
+    z-index: 1000;
+  }
+  
+  .options-popup button {
+    background: none;
+    border: none;
+    cursor: pointer;
+    color: red;
+    padding: 5px 0;
+    display: block;
+    width: 100%;
+  }
+  
+  .options-popup button:hover {
+    background-color: #f1f1f1;
+  }
+  
+    
