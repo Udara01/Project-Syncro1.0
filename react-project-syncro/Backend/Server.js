@@ -94,6 +94,8 @@ const projectRoutes = require('./Routers/projectMember')//root for the get a pro
 const notificationRoutes = require('./Routers/notifications');//root for the notification
 const useremail = require('./Routers/user')
 const timeTracking = require('./Routers/timeTracking')
+const taskRoutes = require('./Routers/tasks'); // Import the task routes
+
 
  
 const bodyParser = require('body-parser');
@@ -136,9 +138,14 @@ app.use('/api/users', useremail);
 
 app.use('/api', timeTracking);
 
+app.use('/api/tasks', taskRoutes); // Use the task routes
+
+
 app.get('/', function(req, res) {
   res.send(`<h1>Server is running on ${PORT}</h1>`);
 });
+
+
 
 
 const User = require('./Modules/UserSchema')

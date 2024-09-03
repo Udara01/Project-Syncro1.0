@@ -1,13 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import Navbarmain from '../../../../Components/Layouts/Navbarmain';
-import Sidebar from '../../../../Components/Layouts/SidebarHome';
-import Footer from '../../../../Components/Layouts/Footer';
+import Navbarmain from '../../../Components/Layouts/Navbarmain';
+import Sidebar from '../../../Components/Layouts/SidebarHome';
+import Footer from '../../../Components/Layouts/Footer';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import '../../../../styles/TaskList.css';
+import '../../../../src/styles/TaskList.css';
 import { useParams } from 'react-router-dom';
 
-const TaskList = ({ userId }) => {
+const TaskListPage = ({ userId }) => {
   const [tasks, setTasks] = useState([]);
   const [isSidebarOpen, setIsSidebarOpen] = useState(true);
   const { projectId } = useParams();
@@ -57,29 +57,36 @@ const TaskList = ({ userId }) => {
 
         <div className="d-flex flex-grow-1 content">
           <div className="container mt-5">
-            <h2 className="mb-4">My Tasks</h2>
-            <div className="row">
-              {tasks.map(task => (
-                <div key={task._id} className="col-md-6 mb-4">
-                  <div className="card shadow">
-                    <div className="card-body">
-                      <h4 className="card-title">{task.name}</h4>
-                      <p className="card-text">{task.description}</p>
-                      <p className="card-text">Status: {task.completed ? 'Completed' : task.confirmed ? 'Confirmed' : 'Pending'}</p>
-                      {!task.confirmed && (
-                        <button className="btn btn-primary" onClick={() => confirmTask(task._id)}>
-                          Confirm
-                        </button>
-                      )}
-                      {task.confirmed && !task.completed && (
-                        <button className="btn btn-success" onClick={() => completeTask(task._id)}>
-                          Complete
-                        </button>
-                      )}
+            <div className="card shadow">
+              <div className="card-header bg-primary text-white">
+                <h4 className="mb-0">Tasks You Have to Complete</h4>
+              </div>
+              <div className="card-body">
+                <div className="row">
+                  {tasks.map(task => (
+                    <div key={task._id} className="col-md-6 mb-4">
+                      <div className="card shadow">
+                        <div className="card-body">
+                          <h5 className="card-title">Document Uploaded</h5>
+                          <p className="card-text">{task.name}</p>
+                          <p className="card-text">Due: {task.dueDate}</p>
+                          <p className="card-text">Status: {task.completed ? 'Completed' : task.confirmed ? 'Confirmed' : 'Pending'}</p>
+                          {!task.confirmed && (
+                            <button className="btn btn-primary" onClick={() => confirmTask(task._id)}>
+                              Confirm
+                            </button>
+                          )}
+                          {task.confirmed && !task.completed && (
+                            <button className="btn btn-success" onClick={() => completeTask(task._id)}>
+                              Complete
+                            </button>
+                          )}
+                        </div>
+                      </div>
                     </div>
-                  </div>
+                  ))}
                 </div>
-              ))}
+              </div>
             </div>
           </div>
         </div>
@@ -89,4 +96,4 @@ const TaskList = ({ userId }) => {
   );
 };
 
-export default TaskList;
+export default TaskListPage;

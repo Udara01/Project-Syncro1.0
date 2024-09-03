@@ -35,10 +35,10 @@ import MeetingPage from './Modules/VirtualMeeting/pages/MeetingPage';//To create
 import Notifications from './Modules/Notification/Components/Notifications';//To fetch the notifications and mark as read
 import CreateNotification from './Modules/Notification/Components/CreateNotification';//just check one no need
 
-import TaskList from './Modules/ProjectDashboard/Components/TaskList';  
 import TaskCreationForm from './Modules/Task/Pages/Components/TaskCreationForm';  
 import TaskApp from './Modules/Task/Pages/Components/TaskApp';
-
+import TaskCreationPage from './Modules/Task/page/TaskCreationPage';
+import TaskListPage from './Modules/Task/page/TaskListPage';
 
 function App() {
   return (
@@ -69,9 +69,9 @@ function App() {
       <Route path='/notification' element={<Notifications ></Notifications >}></Route>
       <Route path='/create-notification' element={<CreateNotification />} />
       
-     <Route path='/taskList' element={<TaskList></TaskList>} />
-     <Route path='/taskCreat' element={<TaskCreationForm></TaskCreationForm>} />
-     <Route path='/taskApp' element={<TaskApp></TaskApp>} />
+     <Route path='/projects/:projectId/tasks' element={<TaskListPage></TaskListPage>} />
+     <Route path='/projects/:projectId/taskCreat' element={<TaskCreationPage></TaskCreationPage>} />
+     <Route path='/taskApp' element={<TaskApp></TaskApp>} /> 
 
 {/*Role base access control test*/}
           <Route path='/project-planning/:projectId' element={<PrivateRoute requiredRole="Project Manager" />}>
