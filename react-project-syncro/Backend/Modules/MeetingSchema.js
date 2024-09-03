@@ -8,6 +8,8 @@ const meetingSchema = new mongoose.Schema({
   join_url: String,
   members: [String],
   projectId: { type: mongoose.Schema.Types.ObjectId, ref: 'Project', required: true },
+  projectName: { type: String, required: true }  // Change this to a string
+
 });
 
 module.exports = mongoose.model('Meeting', meetingSchema);

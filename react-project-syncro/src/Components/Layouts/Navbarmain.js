@@ -227,7 +227,7 @@ const Navbarmain = ({ toggleSidebar, isSidebarOpen }) => {
             <NavDropdown.Divider />
             <NavDropdown.Item onClick={handleLogout}>Log out</NavDropdown.Item>
           </NavDropdown>
-          <Nav.Link href="#settings">
+          <Nav.Link href="/setting">
             <IoSettingsOutline style={{ fontSize: '22px', marginRight: '40px', marginLeft: '20px' }} />
           </Nav.Link>
         </Nav>

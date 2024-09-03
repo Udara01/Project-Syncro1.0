@@ -1,0 +1,48 @@
+.SettingsPage {
+  display: flex;
+  flex-direction: column;
+}
+
+.main-container {
+  display: flex;
+  flex: 1;
+  overflow: hidden;
+}
+
+.sidebar-open {
+  margin-left: 0;
+}
+
+.sidebar-closed {
+  margin-left: -250px;
+  transition: margin-left 0.3s ease;
+}
+
+.content {
+  flex: 1;
+  padding: 20px;
+  overflow-y: auto;
+}
+
+.card {
+  border-radius: 0.5rem;
+  border: 1px solid #ddd;
+}
+
+.card-body {
+  padding: 1.5rem;
+}
+
+.mb-4 {
+  margin-bottom: 1.5rem;
+}
+
+@media (max-width: 768px) {
+  .content {
+    padding: 10px;
+  }
+
+  .sidebar-closed {
+    margin-left: -200px;
+  }
+}

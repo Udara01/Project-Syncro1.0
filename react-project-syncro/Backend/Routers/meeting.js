@@ -47,10 +47,10 @@ router.get('/oauth/callback', async (req, res) => {
 
     res.redirect('http://localhost:3000'); // Redirect back to the frontend
   } catch (error) {
-    res.status(500).send(error.message);
+    console.error('Error exchanging authorization code:', error.message);
+    res.status(500).send('Failed to authorize with Zoom');
   }
 });
-
 
 // Function to refresh the access token
 const refreshAccessToken = async () => {
@@ -82,7 +82,7 @@ const refreshAccessToken = async () => {
     return access_token;
   } catch (error) {
     console.error('Error refreshing access token:', error.message);
-    throw error;
+    throw new Error('Failed to refresh access token');
   }
 };
 
@@ -97,11 +97,12 @@ router.get('/accessToken', async (req, res) => {
 
     res.json({ accessToken: tokenData.accessToken });
   } catch (error) {
-    res.status(500).send(error.message);
+    console.error('Error fetching access token:', error.message);
+    res.status(500).send('Failed to retrieve access token');
   }
 });
 
-// Create a Zoom meeting and save to MongoDB
+// Inside /createMeeting endpoint
 router.post('/createMeeting', async (req, res) => {
   const { topic, start_time, duration, timezone, members, projectId } = req.body;
 
@@ -129,6 +130,10 @@ router.post('/createMeeting', async (req, res) => {
         { headers: { Authorization: `Bearer ${accessToken}` } }
       );
 
+      // Get the project name using the projectId
+      const project = await Project.findById(projectId);
+      const projectName = project ? project.projectName : 'Unknown Project'; // Fetch the projectName here
+
       // Save meeting details to MongoDB
       const newMeeting = new Meeting({
         topic,
@@ -137,24 +142,17 @@ router.post('/createMeeting', async (req, res) => {
         timezone,
         join_url: response.data.join_url,
         members,
-        projectId
+        projectId,
+        projectName // Correctly assign the projectName here
       });
 
       await newMeeting.save();
 
-      // Get the project name using the projectId
-      const project = await Project.findById(projectId);
-      const projectName = project ? project.projectName : 'Unknown Project';
-
-      // Create notifications for each member
-      for (const memberEmail of members) {
-        const user = await User.findOne({ email: memberEmail });
-        if (user) {
-          const message = `A new meeting for project "${projectName}" has been scheduled: ${topic}`;
-          await createNotification(user._id, 'meeting', message);
-        } else {
-          console.error(`User with email ${memberEmail} not found`);
-        }
+      // Optimize fetching users for notifications
+      const users = await User.find({ email: { $in: members } });
+      for (const user of users) {
+        const message = `A new meeting for project "${projectName}" has been scheduled: ${topic}`;
+        await createNotification(user._id, 'meeting', message);
       }
 
       res.json(newMeeting);
@@ -170,6 +168,10 @@ router.post('/createMeeting', async (req, res) => {
           { headers: { Authorization: `Bearer ${accessToken}` } }
         );
 
+        // Get the project name using the projectId
+        const project = await Project.findById(projectId);
+        const projectName = project ? project.projectName : 'Unknown Project';
+
         // Save meeting details to MongoDB
         const newMeeting = new Meeting({
           topic,
@@ -178,45 +180,41 @@ router.post('/createMeeting', async (req, res) => {
           timezone,
           join_url: response.data.join_url,
           members,
-          projectId
+          projectId,
+          projectName // Correctly assign the projectName here
         });
 
         await newMeeting.save();
 
-        // Get the project name using the projectId
-        const project = await Project.findById(projectId);
-        const projectName = project ? project.projectName : 'Unknown Project';
-
-        // Create notifications for each member
-        for (const memberEmail of members) {
-          const user = await User.findOne({ email: memberEmail });
-          if (user) {
-            const message = `A new meeting for project "${projectName}" has been scheduled: ${topic}`;
-            await createNotification(user._id, 'meeting', message);
-          } else {
-            console.error(`User with email ${memberEmail} not found`);
-          }
+        // Optimize fetching users for notifications
+        const users = await User.find({ email: { $in: members } });
+        for (const user of users) {
+          const message = `A new meeting for project "${projectName}" has been scheduled: ${topic}`;
+          await createNotification(user._id, 'meeting', message);
         }
-
 
         res.json(newMeeting);
       } else {
         console.error('Error creating Zoom meeting:', error.response ? error.response.data : error.message);
-        res.status(500).send(error.response ? error.response.data : error.message);
+        res.status(500).send('Failed to create Zoom meeting');
       }
     }
   } catch (error) {
     console.error('Error creating Zoom meeting:', error.message);
-    res.status(500).send(error.message);
+    res.status(500).send('Failed to create Zoom meeting');
   }
 });
 
-// Fetch all meetings
+
+
+
+// Fetch all meetings with project names
 router.get('/meetings', async (req, res) => {
   try {
-    const meetings = await Meeting.find();
+    const meetings = await Meeting.find().populate('projectId', 'projectName');
     res.json(meetings);
   } catch (err) {
+    console.error('Error fetching meetings:', err.message);
     res.status(500).json({ error: 'Error fetching meetings' });
   }
 });
