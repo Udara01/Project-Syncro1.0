@@ -86,7 +86,6 @@ const useremail = require('./Routers/user')
 const ProjectDetails = require ('./Routers/projects')
 const taskRoutes = require('./Routers/mainTask');
 
-const teamManagementRoutes = require('./Routers/team');
 
  
 const bodyParser = require('body-parser');
@@ -127,8 +126,7 @@ app.use('/api/projects', ProjectDetails); // Route for getting project details b
 app.use('/api/tasks', taskRoutes);
 
 
-// Team Management Routes
-app.use('/api/team-management', teamManagementRoutes); 
+
 
 
 
