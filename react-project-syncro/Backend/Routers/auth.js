@@ -172,30 +172,25 @@ router.post('/login', async (req, res) => {
         const user = await User.findOne({ email });
         if (!user) {
             console.error('Invalid credentials: User not found for email:', email);
-            return res.status(400).json({ msg: 'Invalid credentials' });
+            return res.status(400).json({ msg: `The email address you entered is not registered.` });
         }
         const isMatch = await user.matchPassword(password);
         if (!isMatch) {
             console.error('Invalid credentials: Password mismatch for email:', email);
-            return res.status(400).json({ msg: 'Invalid credentials' });
+            return res.status(400).json({ msg: 'The password you entered is incorrect.' });
         }
 
         const payload = { userId: user._id };
         const token = jwt.sign(payload, JWT_SECRET, { expiresIn: '1h' });
 
        res.cookie('token', token, { httpOnly: true });
-        res.json({ token, username: user.username, useremail: user.email });
+        res.json({ token, username: user.username, useremail: user.email, userId: user._id });
     } catch (err) {
         console.error(err.message);
         res.status(500).send('Server error');
     }
 });
 
-//Logout Process
-router.post('/logout', (req, res) => {
-    res.clearCookie('token');
-    res.status(200).json({ message: 'Logged out successfully' });
-});
 
 const authMiddleware = (req, res, next) => {
     const token = req.cookies.token;
@@ -210,6 +205,13 @@ const authMiddleware = (req, res, next) => {
         res.status(401).json({ msg: 'Token is not valid' });
     }
 };
+
+//Logout Process
+router.post('/logout', (req, res) => {
+    res.clearCookie('token');
+    res.status(200).json({ message: 'Logged out successfully' });
+});
+
 
 router.get('/protected', authMiddleware, (req, res) => {
     res.status(200).json({ msg: 'This is a protected route' });

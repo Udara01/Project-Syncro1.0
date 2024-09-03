@@ -1,107 +1,11 @@
-/*
-const express = require('express');
-const axios = require('axios');
-const querystring = require('querystring');
-const Meeting = require('../Modules/MeetingSchema'); // Add this line
-const router = express.Router();
-
-const clientId = 'n2IKbhxEQ_SG1YbsKVkOIQ';
-const clientSecret = 'Nj1ylZhlJS63GuB3ZK6KVkJHHBc820OT';
-const redirectUri = 'http://localhost:4000/oauth/callback';
-
-let accessToken = ''; // In-memory store for demo purposes; use a database for production
-
-// Redirect to Zoom OAuth authorization URL
-router.get('/authorize', (req, res) => {
-  const authorizationUrl = `https://zoom.us/oauth/authorize?client_id=${clientId}&response_type=code&redirect_uri=${encodeURIComponent(redirectUri)}`;
-  res.redirect(authorizationUrl);
-});
-
-// OAuth callback to exchange code for access token
-router.get('/oauth/callback', async (req, res) => {
-  const authorizationCode = req.query.code;
-
-  try {
-    const tokenResponse = await axios.post('https://zoom.us/oauth/token', querystring.stringify({
-      grant_type: 'authorization_code',
-      code: authorizationCode,
-      redirect_uri: redirectUri
-    }), {
-      headers: {
-        Authorization: 'Basic ' + Buffer.from(`${clientId}:${clientSecret}`).toString('base64'),
-        'Content-Type': 'application/x-www-form-urlencoded'
-      }
-    });
-
-    accessToken = tokenResponse.data.access_token;
-    res.redirect('http://localhost:3000'); // Redirect back to the frontend
-  } catch (error) {
-    res.status(500).send(error.message);
-  }
-});
-
-// Endpoint to get the stored access token
-router.get('/accessToken', (req, res) => {
-  res.json({ accessToken });
-});
-
-// Create a Zoom meeting and save to MongoDB
-router.post('/createMeeting', async (req, res) => {
-  const { topic, start_time, duration, timezone, members,projectId } = req.body;
-
-  const meetingConfig = {
-    topic,
-    type: 2, // Scheduled meeting
-    start_time,
-    duration,
-    timezone,
-    projectId
-  };
-
-  try {
-    const response = await axios.post(
-      'https://api.zoom.us/v2/users/me/meetings',
-      meetingConfig,
-      { headers: { Authorization: `Bearer ${accessToken}` } }
-    );
-
-    // Save meeting details to MongoDB
-    const newMeeting = new Meeting({
-      topic,
-      start_time,
-      duration,
-      timezone,
-      join_url: response.data.join_url,
-      members,
-      projectId
-    });
-
-    await newMeeting.save();
-
-    res.json(newMeeting);
-  } catch (error) {
-    console.error('Error creating Zoom meeting:', error.response ? error.response.data : error.message);
-    res.status(500).send(error.response ? error.response.data : error.message);
-  }
-});
-
-// Fetch all meetings
-router.get('/meetings', async (req, res) => {
-  try {
-      const meetings = await Meeting.find();
-      res.json(meetings);
-  } catch (err) {
-      res.status(500).json({ error: 'Error fetching meetings' });
-  }
-});
-
-module.exports = router;*/
-
 const express = require('express');
 const axios = require('axios');
 const querystring = require('querystring');
 const Meeting = require('../Modules/MeetingSchema');
 const Token = require('../Modules/TokenSchema'); // Import your Token schema
+const User = require('../Modules/UserSchema'); // Import your User schema
+const Project = require('../Modules/projectSchema'); // Import your Project schema
+const { createNotification } = require('../Utils/NotificationUtils'); // Import the notification service
 const router = express.Router();
 
 require('dotenv').config(); // Load environment variables
@@ -146,6 +50,7 @@ router.get('/oauth/callback', async (req, res) => {
     res.status(500).send(error.message);
   }
 });
+
 
 // Function to refresh the access token
 const refreshAccessToken = async () => {
@@ -237,11 +142,165 @@ router.post('/createMeeting', async (req, res) => {
 
       await newMeeting.save();
 
+      // Get the project name using the projectId
+      const project = await Project.findById(projectId);
+      const projectName = project ? project.projectName : 'Unknown Project';
+
+      // Create notifications for each member
+      for (const memberEmail of members) {
+        const user = await User.findOne({ email: memberEmail });
+        if (user) {
+          const message = `A new meeting for project "${projectName}" has been scheduled: ${topic}`;
+          await createNotification(user._id, 'meeting', message);
+        } else {
+          console.error(`User with email ${memberEmail} not found`);
+        }
+      }
+
       res.json(newMeeting);
     } catch (error) {
       if (error.response && error.response.data.code === 124) {
         // Access token expired, refresh it
         accessToken = await refreshAccessToken();
+
+        // Retry creating the meeting with the new access token
+        const response = await axios.post(
+          'https://api.zoom.us/v2/users/me/meetings',
+          meetingConfig,
+          { headers: { Authorization: `Bearer ${accessToken}` } }
+        );
+
+        // Save meeting details to MongoDB
+        const newMeeting = new Meeting({
+          topic,
+          start_time,
+          duration,
+          timezone,
+          join_url: response.data.join_url,
+          members,
+          projectId
+        });
+
+        await newMeeting.save();
+
+        // Get the project name using the projectId
+        const project = await Project.findById(projectId);
+        const projectName = project ? project.projectName : 'Unknown Project';
+
+        // Create notifications for each member
+        for (const memberEmail of members) {
+          const user = await User.findOne({ email: memberEmail });
+          if (user) {
+            const message = `A new meeting for project "${projectName}" has been scheduled: ${topic}`;
+            await createNotification(user._id, 'meeting', message);
+          } else {
+            console.error(`User with email ${memberEmail} not found`);
+          }
+        }
+
+
+        res.json(newMeeting);
+      } else {
+        console.error('Error creating Zoom meeting:', error.response ? error.response.data : error.message);
+        res.status(500).send(error.response ? error.response.data : error.message);
+      }
+    }
+  } catch (error) {
+    console.error('Error creating Zoom meeting:', error.message);
+    res.status(500).send(error.message);
+  }
+});
+
+// Fetch all meetings
+router.get('/meetings', async (req, res) => {
+  try {
+    const meetings = await Meeting.find();
+    res.json(meetings);
+  } catch (err) {
+    res.status(500).json({ error: 'Error fetching meetings' });
+  }
+});
+
+module.exports = router;
+
+/*this part is create and start users own Zoom meetings using their accounts. 
+// Function to refresh the user's access token
+const refreshUserAccessToken = async (userId) => {
+  const tokenData = await Token.findOne({ userId });
+
+  if (!tokenData || !tokenData.refreshToken) {
+    throw new Error('No refresh token found for user');
+  }
+
+  const response = await axios.post('https://zoom.us/oauth/token', querystring.stringify({
+    grant_type: 'refresh_token',
+    refresh_token: tokenData.refreshToken
+  }), {
+    headers: {
+      Authorization: 'Basic ' + Buffer.from(`${clientId}:${clientSecret}`).toString('base64'),
+      'Content-Type': 'application/x-www-form-urlencoded'
+    }
+  });
+
+  const { access_token, refresh_token, expires_in } = response.data;
+  const expiresAt = new Date(Date.now() + expires_in * 1000);
+
+  // Update tokens in the database
+  await Token.findOneAndUpdate(
+    { userId },
+    { accessToken: access_token, refreshToken: refresh_token, expiresAt }
+  );
+
+  return access_token;
+};
+
+// Create a Zoom meeting and save to MongoDB
+router.post('/createMeeting', async (req, res) => {
+  const { topic, start_time, duration, timezone, members, projectId } = req.body;
+  const userId = req.user._id; // Assuming user is authenticated and user ID is available
+
+  const meetingConfig = {
+    topic,
+    type: 2, // Scheduled meeting
+    start_time,
+    duration,
+    timezone,
+  };
+
+  try {
+    let tokenData = await Token.findOne({ userId });
+
+    if (!tokenData) {
+      return res.status(401).json({ error: 'No token found for user' });
+    }
+
+    let accessToken = tokenData.accessToken;
+
+    try {
+      const response = await axios.post(
+        'https://api.zoom.us/v2/users/me/meetings',
+        meetingConfig,
+        { headers: { Authorization: `Bearer ${accessToken}` } }
+      );
+
+      // Save meeting details to MongoDB
+      const newMeeting = new Meeting({
+        topic,
+        start_time,
+        duration,
+        timezone,
+        join_url: response.data.join_url,
+        members,
+        projectId
+      });
+
+      await newMeeting.save();
+
+      res.json(newMeeting);
+    } catch (error) {
+      if (error.response && error.response.data.code === 124) {
+        // Access token expired, refresh it
+        accessToken = await refreshUserAccessToken(userId);
 
         // Retry creating the meeting with the new access token
         const response = await axios.post(
@@ -273,18 +332,6 @@ router.post('/createMeeting', async (req, res) => {
     console.error('Error creating Zoom meeting:', error.message);
     res.status(500).send(error.message);
   }
-});
-
-// Fetch all meetings
-router.get('/meetings', async (req, res) => {
-  try {
-    const meetings = await Meeting.find();
-    res.json(meetings);
-  } catch (err) {
-    res.status(500).json({ error: 'Error fetching meetings' });
-  }
-});
+});*/
 
 module.exports = router;
-
-

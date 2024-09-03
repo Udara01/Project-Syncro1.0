@@ -15,8 +15,10 @@ const Sidebar = ({ isSidebarOpen, show, projectId }) => {
 
   const { user } = useContext(UserContext);
   const params = useParams();
-  const actualProjectId = projectId || params.projectId; // Get projectId from params if not provided via props
+  const actualProjectId = projectId || params.projectId; // Get projectId from params if not provided via props 
 
+
+  
   return (
  <Nav className={`sidebar ${isSidebarOpen ? 'open' : 'closed'}`}>
       <div className="sidebar-sticky">
@@ -27,10 +29,11 @@ const Sidebar = ({ isSidebarOpen, show, projectId }) => {
           <div className="user-info">
             <span className="user-name">{user?.username}</span>
             <br></br>
-            <span className="user-email">{user?.useremail}</span>
-          </div>
+            <span className="user-email">{user?.useremail}</span><br></br>
+            <span className="user-id">{user?.userId}</span> {/* Changed className to user-id */}
+            </div>
         </div>
-        <hr />
+        <hr style={{ width: '150%' }} />
         <Nav.Item className="nav-item">
           <Nav.Link href="/home" className="d-flex align-items-center">
             <FaHome className="me-2" />
