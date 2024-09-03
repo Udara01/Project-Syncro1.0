@@ -141,23 +141,15 @@ const MeetingDetails = () => {
               <div key={index} className="meeting-details mb-3 p-3 border rounded">
                 <h6 className="card-title mb-2">{meeting.topic}</h6>
                 <p className="card-text mb-1">
+                  <strong>Project Name:</strong> {meeting.projectId?.projectName || 'Unknown Project'}
+                </p>
+                <p className="card-text mb-1">
                   <strong>Start Time:</strong> {new Date(meeting.start_time).toLocaleString()}
                 </p>
                 <p className="card-text mb-1">
                   <strong>Duration:</strong> {meeting.duration} minutes
                 </p>
-                <p className="card-text mb-1">
-                  <strong>Timezone:</strong> {meeting.timezone}
-                </p>
-                <button 
-                  className="btn btn-primary mb-2"
-                  onClick={() => window.open(meeting.join_url, '_blank', 'noopener,noreferrer')}
-                >
-                  Join Meeting
-                </button>
-                <p className="card-text mb-1">
-                  <strong>Participants:</strong> {meeting.members.join(', ')}
-                </p>
+                <a href={meeting.join_url} className="btn btn-sm btn-primary mt-2">Join Meeting</a>
               </div>
             ))
           )}

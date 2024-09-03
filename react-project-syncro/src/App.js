@@ -35,6 +35,8 @@ import MeetingPage from './Modules/VirtualMeeting/pages/MeetingPage';//To create
 import Notifications from './Modules/Notification/Components/Notifications';//To fetch the notifications and mark as read
 import CreateNotification from './Modules/Notification/Components/CreateNotification';//just check one no need
 
+import SettingsPage from './Modules/Setting/Components/SettingsPage';
+
 import TaskCreationForm from './Modules/Task/Pages/Components/TaskCreationForm';  
 import TaskApp from './Modules/Task/Pages/Components/TaskApp';
 import TaskCreationPage from './Modules/Task/page/TaskCreationPage';
@@ -68,6 +70,8 @@ function App() {
 
       <Route path='/notification' element={<Notifications ></Notifications >}></Route>
       <Route path='/create-notification' element={<CreateNotification />} />
+      
+      <Route path='/setting' element={<SettingsPage ></SettingsPage >}></Route>
       
      <Route path='/projects/:projectId/tasks' element={<TaskListPage></TaskListPage>} />
      <Route path='/projects/:projectId/taskCreat' element={<TaskCreationPage></TaskCreationPage>} />

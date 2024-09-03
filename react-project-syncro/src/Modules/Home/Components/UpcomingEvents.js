@@ -62,6 +62,7 @@ const UpcomingEvents = ({ allMeetings = [] }) => { // Set default prop value
                             ) : (
                                 meetingsOnSelectedDate.map((meeting, index) => (
                                     <div key={index} className="meeting-details">
+                                        <p><strong>Project Name:</strong> {meeting.projectId?.projectName || 'Unknown Project'}</p>
                                         <p><strong>Topic:</strong> {meeting.topic}</p>
                                         <p><strong>Time:</strong> {new Date(meeting.start_time).toLocaleTimeString()}</p>
                                         <p><strong>Duration:</strong> {meeting.duration} minutes</p>
