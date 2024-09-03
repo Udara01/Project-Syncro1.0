@@ -1,137 +1,145 @@
-import React, { useState } from 'react';
-import Team from '../../../contexts/Team';
-import 'bootstrap/dist/css/bootstrap.min.css';
-import '../../../styles/VirtualMeeting.css'
+import React, { useState, useEffect } from 'react';
+import axios from 'axios';
+import '../../../styles/TaskCreation.css';  // Import custom CSS
 
-const MeetingForm = ({ onSubmit, projectId }) => {
+const TaskCreationForm = ({ projectId }) => {
+  const [taskName, setTaskName] = useState('');
+  const [taskDescription, setTaskDescription] = useState('');
+  const [assignedMembers, setAssignedMembers] = useState([]);
+  const [dueDate, setDueDate] = useState('');
+  const [teamMembers, setTeamMembers] = useState([]);
+  const [searchTerm, setSearchTerm] = useState('');
 
-  const [formData, setFormData] = useState({
-    topic: '',
-    start_time: '',
-    duration: '',
-    timezone: '',
-  });
-
-  const [selectedMembers, setSelectedMembers] = useState([]);
-  const [successMessage, setSuccessMessage] = useState('');
-
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    setFormData((prevFormData) => ({
-      ...prevFormData,
-      [name]: value,
-    }));
-  };
-
-  const handleSelectMember = (memberEmail) => {
-    setSelectedMembers((prevSelectedMembers) => {
-      if (prevSelectedMembers.includes(memberEmail)) {
-        return prevSelectedMembers.filter((email) => email !== memberEmail);
-      } else {
-        return [...prevSelectedMembers, memberEmail];
+  useEffect(() => {
+    const fetchTeamMembers = async () => {
+      try {
+        const response = await axios.get(`http://localhost:4000/api/projects/${projectId}/team-members`);
+        setTeamMembers(response.data);
+      } catch (error) {
+        console.error('Error fetching team members:', error);
       }
-    });
-  };
-/*
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    onSubmit({ ...formData, members: selectedMembers, projectId });
-  };*/
+    };
+
+    fetchTeamMembers();
+  }, [projectId]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const success = await onSubmit({ ...formData, members: selectedMembers, projectId });
-    if (success) {
-      setFormData({ topic: '', start_time: '', duration: '', timezone: '' });
-      setSelectedMembers([]);
-      setSuccessMessage('Meeting created successfully!');
-      setTimeout(() => setSuccessMessage(''), 5000); // Hide message after 5 seconds
+    try {
+      const task = {
+        name: taskName,
+        description: taskDescription,
+        assignedMembers,
+        dueDate,
+        projectId,
+      };
+      await axios.post('http://localhost:4000/api/tasks', task);  // Send the task data to the backend
+      alert('Task created successfully!');
+      setTaskName('');
+      setTaskDescription('');
+      setAssignedMembers([]);
+      setDueDate('');
+    } catch (error) {
+      console.error('Error creating task:', error);
+      alert('Failed to create task');
     }
   };
 
+  const handleSelectMember = (memberId) => {
+    setAssignedMembers((prevAssignedMembers) => {
+      if (prevAssignedMembers.includes(memberId)) {
+        return prevAssignedMembers.filter((id) => id !== memberId);
+      } else {
+        return [...prevAssignedMembers, memberId];
+      }
+    });
+  };
+
+  const filteredMembers = teamMembers.filter((member) =>
+    member.name.toLowerCase().includes(searchTerm.toLowerCase()) || 
+    member.email.toLowerCase().includes(searchTerm.toLowerCase())
+  );
 
   return (
-    
-    <form onSubmit={handleSubmit} className="p-3">
-      {successMessage && <div className="alert alert-success">{successMessage}</div>}
-      <div className="mb-3">
-        <label htmlFor="topic" className="form-label">Topic</label>
-        <input
-          type="text"
-          className="form-control"
-          id="topic"
-          name="topic"
-          placeholder="Enter meeting topic"
-          value={formData.topic}
-          onChange={handleChange}
-          required
-        />
-      </div>
-      <div className="mb-3">
-        <label htmlFor="start_time" className="form-label">Start Time</label>
-        <input
-          type="datetime-local"
-          className="form-control"
-          id="start_time"
-          name="start_time"
-          value={formData.start_time}
-          onChange={handleChange}
-          required
-        />
-      </div>
-      <div className="mb-3">
-        <label htmlFor="duration" className="form-label">Duration (minutes)</label>
-        <input
-          type="number"
-          className="form-control"
-          id="duration"
-          name="duration"
-          placeholder="Enter duration"
-          value={formData.duration}
-          onChange={handleChange}
-          required
-        />
-      </div>
-      <div className="mb-3">
-        <label htmlFor="timezone" className="form-label">Timezone</label>
-        <input
-          type="text"
-          className="form-control"
-          id="timezone"
-          name="timezone"
-          placeholder="Enter timezone"
-          value={formData.timezone}
-          onChange={handleChange}
-          required
-        />
-      </div>
-      <div className="mb-3">
-        <label className="form-label">Team Members:</label>
-        <Team onSelectMember={handleSelectMember} projectId={projectId} />
-        <div className="mt-2">
-          {selectedMembers.map((member, index) => (
-            <span key={index} className="badge bg-secondary me-2">
-              {member}
-              <button
-                type="button"
-                className="btn-close btn-close-white ms-2"
-                aria-label="Close"
-                onClick={() => handleSelectMember(member)}
-              ></button>
-            </span>
-          ))}
+    <div className="task-form-container">
+      <h2>Create Task</h2>
+      <form onSubmit={handleSubmit}>
+        <div className="form-group">
+          <label>Task Name:</label>
+          <input
+            type="text"
+            className="form-control"
+            value={taskName}
+            onChange={(e) => setTaskName(e.target.value)}
+            required
+          />
         </div>
-      </div>
-      <div className="d-flex justify-content-end">
-        <button type="submit" className="btn btn-primary me-2">
-          Schedule Meeting
+        <div className="form-group">
+          <label>Description:</label>
+          <textarea
+            className="form-control"
+            value={taskDescription}
+            onChange={(e) => setTaskDescription(e.target.value)}
+            required
+          />
+        </div>
+        <div className="form-group">
+          <label>Assign Members:</label>
+          <input
+            type="text"
+            className="form-control"
+            placeholder="Search team members..."
+            value={searchTerm}
+            onChange={(e) => setSearchTerm(e.target.value)}
+          />
+          <div className="team-members-list">
+            {filteredMembers.length > 0 ? (
+              filteredMembers.map((member) => (
+                <div
+                  key={member._id}
+                  className={`team-member-item ${assignedMembers.includes(member._id) ? 'selected' : ''}`}
+                  onClick={() => handleSelectMember(member._id)}
+                >
+                  {member.name} ({member.email})
+                </div>
+              ))
+            ) : (
+              <div>No members found</div>
+            )}
+          </div>
+          <div className="selected-members">
+            {assignedMembers.map((memberId) => {
+              const member = teamMembers.find((m) => m._id === memberId);
+              return (
+                <span key={memberId} className="badge bg-secondary me-2">
+                  {member.name}
+                  <button
+                    type="button"
+                    className="btn-close btn-close-white ms-2"
+                    aria-label="Close"
+                    onClick={() => handleSelectMember(memberId)}
+                  ></button>
+                </span>
+              );
+            })}
+          </div>
+        </div>
+        <div className="form-group">
+          <label>Due Date:</label>
+          <input
+            type="date"
+            className="form-control"
+            value={dueDate}
+            onChange={(e) => setDueDate(e.target.value)}
+          />
+        </div>
+        <button type="submit" className="btn btn-submit">
+          Create Task
         </button>
-        <button type="button" className="btn btn-danger">
-          Cancel
-        </button>
-      </div>
-    </form>
+      </form>
+    </div>
   );
 };
 
-export default MeetingForm;
+export default TaskCreationForm;
+

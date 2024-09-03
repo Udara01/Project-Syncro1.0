@@ -14,6 +14,7 @@ import TeamMembers from '../Components/TeamMembers';
 import { UserContext } from '../../../contexts/UserContext'; // Import UserContext
 import '../../../styles/ProjectDashboard.css';
 
+
 function Dashboard() {
   const [isSidebarOpen, setIsSidebarOpen] = useState(true);
 
@@ -85,6 +86,9 @@ function Dashboard() {
           <Link to={`/projects/${projectId}/add-meeting`}>Create a New Meeting</Link>
 
           <Link to={`/projects/${projectId}/create-meeting`}>Create a New Meeting2</Link>
+<br></br>
+          <Link to={`/projects/${projectId}/taskCreat`}>Create a New task</Link>
+        
 
           <div className="container">
             <div className="row">
