@@ -4,10 +4,10 @@
   "description": "A React library for managing automated tasks",
   "private": true,
   "dependencies": {
-    "@testing-library/jest-dom": "^5.17.0",
-    "@testing-library/react": "^13.4.0",
     "@testing-library/user-event": "^13.5.0",
     "axios": "^1.7.2",
+    "babel-jest": "^29.7.0",
+    "bcryptjs": "^2.4.3",
     "bootstrap": "^5.3.3",
     "chart.js": "^4.4.3",
     "react": "^18.3.1",
@@ -49,5 +49,16 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "@babel/plugin-proposal-private-property-in-object": "^7.21.11",
+    "@babel/preset-env": "^7.21.11",
+    "@babel/preset-react": "^7.24.7",
+    "@testing-library/jest-dom": "^6.5.0",
+    "@testing-library/react": "^16.0.1",
+    "babel-jest": "^27.5.1",
+    "jest": {
+  "moduleDirectories": ["node_modules", "src"]
+}
   }
 }

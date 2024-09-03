@@ -35,6 +35,8 @@ import MeetingPage from './Modules/VirtualMeeting/pages/MeetingPage';//To create
 import Notifications from './Modules/Notification/Components/Notifications';//To fetch the notifications and mark as read
 import CreateNotification from './Modules/Notification/Components/CreateNotification';//just check one no need
 
+import SettingsPage from './Modules/Setting/Components/SettingsPage';
+
 
 
 function App() {
@@ -66,6 +68,7 @@ function App() {
       <Route path='/notification' element={<Notifications ></Notifications >}></Route>
       <Route path='/create-notification' element={<CreateNotification />} />
       
+      <Route path='/setting' element={<SettingsPage ></SettingsPage >}></Route>
 {/*Role base access control test*/}
           <Route path='/project-planning/:projectId' element={<PrivateRoute requiredRole="Project Manager" />}>
             <Route path='' element={<ProjectPlanning />} />

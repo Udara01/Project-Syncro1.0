@@ -67,3 +67,22 @@
 .col-md-4, .col-md-12 {
   padding: 10px;
 }
+
+
+
+/* ProjectDashboard.css */
+
+.sidebar-open .content {
+  margin-left: 250px; /* Adjust based on sidebar width */
+}
+
+.sidebar-closed .content {
+  margin-left: 0;
+}
+
+@media (max-width: 768px) {
+  .sidebar-open .content, .sidebar-closed .content {
+    margin-left: 0; /* Adjust for smaller screens */
+    padding: 10px;
+  }
+}
