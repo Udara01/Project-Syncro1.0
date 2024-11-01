@@ -4,14 +4,14 @@ import React from 'react';
 import { Navbar, Nav, Button, Container, Row, Col } from 'react-bootstrap';
 import { LinkContainer } from 'react-router-bootstrap';
 import '../styles/HeaderLanding.css'
+import { color } from 'chart.js/helpers';
 
 
 
 const HeaderLanding = () => {
   return (
     <Navbar bg="light" expand="lg" className="header">
-      <Navbar.Brand href="#">
-        <img src="logo.png" alt="Syncro Logo" width="40" className="d-inline-block align-top" style={{ marginLeft: '20px' }} /> {/* Replace with your logo */}
+      <Navbar.Brand href="/" style={{ color: '#007bff' }}>
         Syncro
       </Navbar.Brand>
       <Navbar.Toggle aria-controls="basic-navbar-nav" />

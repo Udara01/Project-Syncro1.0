@@ -1,5 +1,5 @@
 import React from 'react';
-import { Nav, Dropdown, DropdownButton,} from 'react-bootstrap';
+import { Nav, Dropdown} from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import '../../styles/nav.css';
@@ -12,13 +12,27 @@ const ProjectNavbar = ({ userRoles, projectId }) => { //in here projectNavbar is
           <Dropdown as={Nav.Item}>
             <Dropdown.Toggle as={Nav.Link} className="nav-link-custom active">
               Planning
-            </Dropdown.Toggle>
+            </Dropdown.Toggle>               
             <Dropdown.Menu>
-              <Dropdown.Item href="/planning/task1">Task 1</Dropdown.Item>
-              <Dropdown.Item href="/planning/task2">Task 2</Dropdown.Item>
-              <Dropdown.Item href="/planning/task3">Task 3</Dropdown.Item>
-            </Dropdown.Menu>
-          </Dropdown>
+              {/*{(userRoles.includes('Team Lead') || userRoles.includes('Product Owner')) && (
+              <Dropdown.Item as={Link} to={`/projects/${projectId}/tasks`}>Task Management</Dropdown.Item>)}*/}
+              
+            {userRoles.includes('Team Lead') && (
+              <Dropdown.Item as={Link} to={`/projects/${projectId}/CreateTask`}>Task Management</Dropdown.Item>)}
+
+              {userRoles.includes('Project Manager') && (
+              <Dropdown.Item as={Link} to={`/projects/${projectId}/updateproject`}>Project Control</Dropdown.Item>)}
+
+              {userRoles.includes('Project Manager') && (
+              <Dropdown.Item as={Link} to={`/projects/${projectId}/project-planning`}>Project Planning</Dropdown.Item>)}
+
+             {/*  <Dropdown.Item href={`/projects/${projectId}/milestoneForm`}>MilestoneForm</Dropdown.Item> */}
+              <Dropdown.Item href={`/projects/${projectId}/milestone-List`}>project Milestones</Dropdown.Item>
+
+             {/* <Dropdown.Item href={`/projects/${projectId}/gantt`}>Gantt Chart</Dropdown.Item>/    */}
+            </Dropdown.Menu>      
+
+          </Dropdown>                 
         </Nav.Item>
         <Nav.Item>
           <Dropdown as={Nav.Item}>
@@ -26,11 +40,19 @@ const ProjectNavbar = ({ userRoles, projectId }) => { //in here projectNavbar is
               Requirements
             </Dropdown.Toggle>
             <Dropdown.Menu>
-              <Dropdown.Item href="/requirements/requirement1">Business Analyst</Dropdown.Item>
+           {/*   {userRoles.includes('Product Owner') && (
+              <Dropdown.Item as={Link} to={`/prioritize-requirements/${projectId}`}>Prioritize Requirements</Dropdown.Item>)}*/} 
+
+              {userRoles.includes('Business Analyst') && (
+              <Dropdown.Item as={Link} to={`/projects/${projectId}/requirement`}>Project Requirements</Dropdown.Item>)}
+
               {userRoles.includes('Product Owner') && (
-              <Dropdown.Item as={Link} to={`/prioritize-requirements/${projectId}`}>Prioritize Requirements</Dropdown.Item>)}
-              <Dropdown.Item href="/requirements/requirement3">Requirement 3</Dropdown.Item>
-            </Dropdown.Menu>
+              <Dropdown.Item as={Link} to={`/projects/${projectId}/requirementlist`}>Project Requirements</Dropdown.Item>)}
+
+              <Dropdown.Item as={Link} to={`/projects/${projectId}/prioritylist`}>Prioritized Requirements</Dropdown.Item>
+            </Dropdown.Menu>        
+
+{/*'Project Manager', 'Product Owner', 'Business Analyst', 'Software Architect', 'Team Lead', 'Developers/Programmers', 'UX/UI Designers', 'Quality Assurance Testers', 'Client' */}
           </Dropdown>
         </Nav.Item>
         <Nav.Item>
@@ -39,21 +61,21 @@ const ProjectNavbar = ({ userRoles, projectId }) => { //in here projectNavbar is
               Designs
             </Dropdown.Toggle>
             <Dropdown.Menu>
-              <Dropdown.Item href="/designs/design1">Design 1</Dropdown.Item>
-              <Dropdown.Item href="/designs/design2">Design 2</Dropdown.Item>
-              <Dropdown.Item href="/designs/design3">Design 3</Dropdown.Item>
+              {userRoles.includes('UX/UI Designers') && (
+              <Dropdown.Item as={Link} to={`/projects/${projectId}/design`}>UI Design</Dropdown.Item>)}
+
+              <Dropdown.Item href={`/projects/${projectId}/design/download`}>UI Design Download</Dropdown.Item>
+
             </Dropdown.Menu>
-          </Dropdown>
+          </Dropdown>                 
         </Nav.Item>
         <Nav.Item>
           <Dropdown as={Nav.Item}>
             <Dropdown.Toggle as={Nav.Link} className="nav-link-custom">
               Implementation
-            </Dropdown.Toggle>
+            </Dropdown.Toggle>           
             <Dropdown.Menu>
-              <Dropdown.Item href="/implementation/step1">Step 1</Dropdown.Item>
-              <Dropdown.Item href="/implementation/step2">Step 2</Dropdown.Item>
-              <Dropdown.Item href="/implementation/step3">Step 3</Dropdown.Item>
+              <Dropdown.Item href={`/projects/${projectId}/git`}>GitDashboard</Dropdown.Item>
             </Dropdown.Menu>
           </Dropdown>
         </Nav.Item>
@@ -62,10 +84,9 @@ const ProjectNavbar = ({ userRoles, projectId }) => { //in here projectNavbar is
             <Dropdown.Toggle as={Nav.Link} className="nav-link-custom">
               Testing & Integration
             </Dropdown.Toggle>
-            <Dropdown.Menu>
-              <Dropdown.Item href="/testing/unit">Unit Testing</Dropdown.Item>
-              <Dropdown.Item href="/testing/integration">Integration Testing</Dropdown.Item>
-              <Dropdown.Item href="/testing/e2e">End-to-End Testing</Dropdown.Item>
+            <Dropdown.Menu>  
+            {(userRoles.includes('Team Lead') || userRoles.includes('Quality Assurance Testers') || userRoles.includes('Developers/Programmers')) && (<Dropdown.Item as={Link} to={`/projects/${projectId}/testing`}>Testing</Dropdown.Item>)}         
+
             </Dropdown.Menu>
           </Dropdown>
         </Nav.Item>
@@ -73,11 +94,10 @@ const ProjectNavbar = ({ userRoles, projectId }) => { //in here projectNavbar is
           <Dropdown as={Nav.Item}>
             <Dropdown.Toggle as={Nav.Link} className="nav-link-custom">
               Documents
-            </Dropdown.Toggle>
-            <Dropdown.Menu>
-              <Dropdown.Item href="/documents/specs">Specifications</Dropdown.Item>
-              <Dropdown.Item href="/documents/reports">Reports</Dropdown.Item>
-              <Dropdown.Item href="/documents/diagrams">Diagrams</Dropdown.Item>
+            </Dropdown.Toggle>          
+            <Dropdown.Menu>         
+              <Dropdown.Item href={`/projects/${projectId}/documents`}>Project Documents</Dropdown.Item>
+              <Dropdown.Item href={`/projects/${projectId}/pridocuments`}>My Document</Dropdown.Item>
             </Dropdown.Menu>
           </Dropdown>
         </Nav.Item>

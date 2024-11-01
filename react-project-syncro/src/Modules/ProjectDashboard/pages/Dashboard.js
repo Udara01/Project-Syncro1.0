@@ -22,11 +22,12 @@ function Dashboard() {
     setIsSidebarOpen(!isSidebarOpen);
   };
 
-  const { projectId } = useParams();
+  const { projectId,userId } = useParams();
   const [project, setProject] = useState(null);
   const [error, setError] = useState(null);
   const [userRoles, setUserRoles] = useState([]);
   const { user } = useContext(UserContext); // Access user context
+  
   //const navigate = useNavigate();
 
   useEffect(() => {
@@ -41,6 +42,7 @@ function Dashboard() {
         const roles = response.data.teamMembers
           .filter(member => member.email === currentUserEmail)
           .map(member => member.role);
+          const userId = user ? user._id : null;
           
         setUserRoles(roles.length > 0 ? roles : ['No roles assigned']);
       } catch (err) {
@@ -53,13 +55,17 @@ function Dashboard() {
       }
     };
 
+    
+
     fetchProject();
   }, [projectId, user.useremail]);
 
+
+  
   if (error) {
     return <div>{error}</div>;
   }
-
+  
   if (!project) {
     return <div>Loading...</div>;
   }
@@ -72,8 +78,8 @@ function Dashboard() {
 
         <div className="content" style={{ marginLeft: isSidebarOpen ? '0px' : '-10px', marginTop: '56px', padding: '20px' }}>
           <ProjectNavbar userRoles={userRoles} projectId={projectId} /> {/* Pass userRoles and projectId as props to the ProjectNavbar */}
-
-          {/* Role-based access control test */}
+{/*
+           Role-based access control test 
           {userRoles.includes('Project Manager') && (
             <Link to={`/project-planning/${projectId}`}>Go to Project Planning</Link>
           )}
@@ -81,14 +87,27 @@ function Dashboard() {
           {userRoles.includes('Product Owner') && (
             <Link to={`/product-owner/${projectId}`}>Go to Product Owner Page</Link>
           )}
-          {/* Role-based access control test */}
+
           <br />
           <Link to={`/projects/${projectId}/add-meeting`}>Create a New Meeting</Link>
 
           <Link to={`/projects/${projectId}/create-meeting`}>Create a New Meeting2</Link>
 <br></br>
-          <Link to={`/projects/${projectId}/taskCreat`}>Create a New task</Link>
+          <Link to={`/projects/${projectId}/taskCreat`}>Create a New task</Link> */}
         
+
+
+         <Link to={`/projects/${projectId}/sprints`}>Project Plan</Link> <br></br>
+
+         <Link to={`/projects/${projectId}/gantt`}>Gantt</Link> <br></br>
+
+         <Link to={`/projects/${projectId}/taskassign`}>TaskAssignModal</Link> <br></br>
+
+         <Link to={`/projects/${projectId}/ParentComponent`}>ParentComponent</Link> <br></br>
+
+
+         <Link to={`/projects/${projectId}/tasks`}>ParentComponent</Link> <br></br>
+   
 
           <div className="container">
             <div className="row">
@@ -101,8 +120,8 @@ function Dashboard() {
               <div className="col-md-4">
                 <br></br>
                 <h1>{project.projectName}</h1>
-                <p>Project ID: {projectId}</p>
-                <p>Roles Of Project: {userRoles.join(' | ')}</p>{/* Display all user roles */}
+              {/*  <p>Project ID: {projectId}</p>
+                <p>Roles Of Project: {userRoles.join(' | ')}</p> Display all user roles */}
 
               </div>
 

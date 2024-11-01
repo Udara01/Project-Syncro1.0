@@ -1,0 +1,115 @@
+/* Styles for Task Dashboard */
+.task-dashboard {
+  margin: 20px;
+  background-color: #f9f9f9;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.task-dashboard h3 {
+  color: #4a4a4a;
+  font-size: 1.8rem;
+  margin-bottom: 25px;
+  font-weight: 600;
+  text-align: center;
+  text-transform: uppercase;
+  letter-spacing: 1.2px;
+}
+
+.task-dashboard table {
+  border-collapse: separate;
+  border-spacing: 0 10px;
+  width: 100%;
+  margin-bottom: 25px;
+  background-color: #fff;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.08);
+}
+
+.task-dashboard table th, .task-dashboard table td {
+  text-align: left;
+  padding: 16px;
+  font-size: 0.95rem;
+  vertical-align: middle;
+}
+
+/* Updated colors with gradient and shadows */
+.status-badge.pending {
+  background: linear-gradient(45deg, #ff8800, #f0c14e);
+  color: white;
+}
+
+.status-badge.in-progress {
+  background: linear-gradient(45deg, #4bb0de, #4bc7e8);
+  color: white;
+}
+
+.status-badge.completed {
+  background: linear-gradient(45deg, #002f16, #77e977);
+  color: white;
+}
+
+
+.task-dashboard table th {
+  background-color: #f1f3f5;
+  color: #333;
+  text-transform: uppercase;
+  letter-spacing: 0.8px;
+}
+
+.task-dashboard table td {
+  background-color: #fff;
+  color: #555;
+}
+
+.task-dashboard table td:first-child, .task-dashboard table th:first-child {
+  border-top-left-radius: 8px;
+  border-bottom-left-radius: 8px;
+}
+
+.task-dashboard table td:last-child, .task-dashboard table th:last-child {
+  border-top-right-radius: 8px;
+  border-bottom-right-radius: 8px;
+}
+
+.status-badge {
+  padding: 8px 14px;
+  border-radius: 12px;
+  font-size: 0.85rem;
+  font-weight: bold;
+  text-transform: capitalize;
+  letter-spacing: 0.5px;
+}
+
+.status-badge.pending {
+  background-color: #ffc107;
+  color: #fff;
+}
+
+.status-badge.in-progress {
+  background-color: #17a2b8;
+  color: #fff;
+}
+
+.status-badge.completed {
+  background-color: #28a745;
+  color: #fff;
+}
+
+.task-dashboard .assigned-to {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.task-dashboard .no-comments {
+  font-style: italic;
+  color: #999;
+}
+
+.table-container {
+  overflow-x: auto;
+}
+

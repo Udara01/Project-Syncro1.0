@@ -1,5 +1,5 @@
 /* TaskList.css */
-
+/*
 .task-list-container {
     margin: 20px auto;
     max-width: 800px;
@@ -68,4 +68,113 @@
   .task-item:hover {
     background-color: #f1f1f1;
   }
-  
+  */
+
+  /* Styles for Task List */
+.task-list {
+  margin: 20px;
+  padding: 20px;
+  background-color: #f9f9f9;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.task-list h3 {
+  color: #333;
+  font-size: 1.8rem;
+  margin-bottom: 20px;
+  font-weight: bold;
+}
+
+.task-list table {
+  width: 100%;
+  border-collapse: collapse;
+  border-spacing: 0;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+}
+
+.task-list table th,
+.task-list table td {
+  text-align: left;
+  padding: 16px;
+  border-bottom: 1px solid #e6e6e6;
+}
+
+.task-list table th {
+  background-color: #4a90e2;
+  color: white;
+  text-transform: uppercase;
+  font-size: 0.9rem;
+  font-weight: bold;
+}
+
+.task-list table td {
+  background-color: white;
+  font-size: 0.95rem;
+  color: #555;
+}
+
+.task-list table tbody tr:nth-child(even) {
+  background-color: #f8f9fa;
+}
+
+.task-list table tbody tr:hover {
+  background-color: #eef2f7;
+  cursor: pointer;
+}
+
+.task-list .btn-primary {
+  margin-bottom: 20px;
+  background-color: #4a90e2;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 4px;
+  font-size: 1rem;
+}
+
+.create-task-btn-wrapper {
+  display: flex;
+  justify-content: flex-end;
+  margin-bottom: 20px;
+}
+
+.task-list .btn-primary:hover {
+  background-color: #357ab7;
+}
+
+.task-list .btn-success {
+  background-color: #5cb85c;
+  border: none;
+}
+
+.task-list .btn-success:hover {
+  background-color: #4a9d4a;
+}
+
+.task-list .btn-secondary {
+  background-color: #6c757d;
+  border: none;
+}
+
+.task-list .btn-secondary:hover {
+  background-color: #5a6268;
+}
+
+/* Form Styles */
+.form-control {
+  border-radius: 6px;
+  padding: 10px;
+  font-size: 0.95rem;
+}
+
+.form-label {
+  font-weight: bold;
+  margin-bottom: 6px;
+  color: #333;
+}
+
+.task-list .form-group {
+  margin-bottom: 16px;
+}

@@ -15,6 +15,11 @@ const Navbarmain = ({ toggleSidebar, isSidebarOpen }) => {
   const [notifications, setNotifications] = useState([]);
   const navigate = useNavigate();
   const { user, setUser } = useContext(UserContext);
+  const userId = user.userId
+  ; 
+
+
+
   useEffect(() => {
 
 //fetching notifications for the corresponding user
@@ -217,13 +222,13 @@ const Navbarmain = ({ toggleSidebar, isSidebarOpen }) => {
             {notifications.length > 6 && (
               <NavDropdown.Item href="/notification">See All Notifications</NavDropdown.Item>
             )}
-          </NavDropdown>
+          </NavDropdown>                
           <NavDropdown
             title={<AiOutlineUser style={{ fontSize: '24px' }} />}
             id="basic-nav-dropdown"
             alignRight
           >
-            <NavDropdown.Item href="#profile">{user?.username}</NavDropdown.Item>
+            <NavDropdown.Item href={`/profile/${userId}`}>{user?.username}</NavDropdown.Item>
             <NavDropdown.Divider />
             <NavDropdown.Item onClick={handleLogout}>Log out</NavDropdown.Item>
           </NavDropdown>

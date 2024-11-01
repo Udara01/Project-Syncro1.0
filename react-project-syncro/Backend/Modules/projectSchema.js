@@ -1,5 +1,4 @@
 //this is use to store about project data
-
 const mongoose = require('mongoose');
 
 // Define the team member schema
@@ -42,9 +41,15 @@ const projectSchema = new mongoose.Schema({
   projectManager: {
     type: String, // Store email or user ID
     required: true
+  },
+
+  status: { // New field for tracking project status
+    type: String,
+    enum: ['Done', 'In Progress', 'To Do', 'In Review', 'On Hold'],
+    default: 'To Do'
   }
+  
 });
 
-// Export the model
 module.exports = mongoose.model('Project', projectSchema);
 

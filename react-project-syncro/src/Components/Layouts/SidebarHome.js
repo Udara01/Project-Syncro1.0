@@ -10,14 +10,14 @@ import { UserContext } from "../../contexts/UserContext"; // Import user context
 import { useParams } from 'react-router-dom';
 
 
-const Sidebar = ({ isSidebarOpen, show, projectId }) => {
+const Sidebar = ({ isSidebarOpen, show, projectId, userRoles }) => {
 
 
   const { user } = useContext(UserContext);
   const params = useParams();
   const actualProjectId = projectId || params.projectId; // Get projectId from params if not provided via props 
 
-
+  const userEmail = user.useremail;
   
   return (
  <Nav className={`sidebar ${isSidebarOpen ? 'open' : 'closed'}`}>
@@ -30,7 +30,6 @@ const Sidebar = ({ isSidebarOpen, show, projectId }) => {
             <span className="user-name">{user?.username}</span>
             <br></br>
             <span className="user-email">{user?.useremail}</span><br></br>
-            <span className="user-id">{user?.userId}</span> {/* Changed className to user-id */}
             </div>
         </div>
         <hr style={{ width: '150%' }} />
@@ -40,12 +39,21 @@ const Sidebar = ({ isSidebarOpen, show, projectId }) => {
             <span>Home</span>
           </Nav.Link>
         </Nav.Item>
-        <Nav.Item className="nav-item">
-          <Nav.Link href="/task" className="d-flex align-items-center">
-            <FaTasks className="me-2" />
-            <span>Tasks</span>
-          </Nav.Link>
-        </Nav.Item>
+        
+        {actualProjectId && (
+          <Nav.Item className="nav-item">
+            <Nav.Link href={`/projects/${projectId}/userTask`} className="d-flex align-items-center">
+              <FaTasks className="me-2" />
+              <span>Tasks</span>
+            </Nav.Link>
+          </Nav.Item>  
+          )}
+
+
+
+
+
+
         <Nav.Item className="nav-item">
           <Nav.Link href="/team" className="d-flex align-items-center">
             <LuUsers className="me-2" />

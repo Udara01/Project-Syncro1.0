@@ -21,7 +21,11 @@
 }
 
 
-
+.navbar-brand {
+  font-weight: bold;
+  color: #007bff; /* Set brand color */
+  margin-left: 50px;
+}
 
 .main-content {
   background-color: #f8f9fa; /* Optional background color */

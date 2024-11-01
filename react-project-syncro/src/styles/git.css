@@ -1,0 +1,27 @@
+.container {
+  max-width: 1000px;
+}
+
+.card {
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.card-header {
+  background-color: #f8f9fa;
+  font-weight: bold;
+}
+
+h1, h2, h4 {
+  color: #333;
+  font-family: 'Arial', sans-serif;
+}
+
+.mt-4, .mb-4 {
+  margin-top: 1.5rem !important;
+  margin-bottom: 1.5rem !important;
+}
+
+.mb-0 {
+  margin-bottom: 0;
+}
