@@ -1,0 +1,64 @@
+.gantt_milestone {
+  background-color: red;
+  transform: rotate(45deg);
+  width: 16px;
+  height: 16px;
+  margin-left: -8px;
+  margin-top: -8px;
+}
+
+.gantt_milestone {
+  background-color: #FF8C00; /* Orange for milestones */
+  border-radius: 50%;
+}
+
+
+.gantt_milestone {
+  background-color: #f5c542;
+  border-radius: 50%;
+  border: 2px solid #e6b31e;
+}
+
+
+.gantt-container {
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.complete-btn {
+  background-color: #28a745;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  padding: 5px 10px;
+  cursor: pointer;
+  font-size: 0.875rem;
+}
+
+.complete-btn:hover {
+  background-color: #218838;
+}
+
+.gantt_milestone .gantt_task_content {
+  background-color: #ff5722 !important;
+  color: #fff;
+  font-weight: bold;
+}
+
+.progress-bar-text {
+  font-weight: bold;
+  color: #fff;
+}
+
+.overall-progress h5 {
+  font-size: 1.25rem;
+  margin-bottom: 10px;
+  font-weight: 600;
+}
+
+@media (max-width: 768px) {
+  .gantt-container {
+    height: 400px;
+  }
+}

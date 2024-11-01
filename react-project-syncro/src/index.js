@@ -6,18 +6,21 @@ import App from './App';
 import reportWebVitals from './reportWebVitals';
 import { BrowserRouter } from 'react-router-dom';
 import { Provider } from 'react-redux';//
-//import store from './store'; // Make sure this path is correct based on your project structure
+
 
 import { UserProvider } from './contexts/UserContext';//use for get user details correctly. user context part
 
+import { MembersProvider } from './contexts/MembersContext';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
       <BrowserRouter>
+      <MembersProvider>
       <UserProvider>
         <App />
         </UserProvider>
+        </MembersProvider>
       </BrowserRouter>
   </React.StrictMode>
 );

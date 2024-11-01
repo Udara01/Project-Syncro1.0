@@ -3,7 +3,7 @@ const router = express.Router();
 const { Task, TeamMember } = require('../Modules/CreateTask');
 
 // Create a new task
-router.post('/', async (req, res) => {
+router.post('/usertasks', async (req, res) => {
   try {
     const { name, description, assignedMembers, dueDate } = req.body;
 

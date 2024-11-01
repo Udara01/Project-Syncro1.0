@@ -251,5 +251,95 @@ router.get('/:id', async (req, res) => {
   }
 });
 
+
+// Route to update an existing project
+/*
+router.put('/:id', upload.single('projectImage'), async (req, res) => {
+  try {
+    const { projectName, startDate, endDate, teamMembers, status } = req.body; // Get status from req.body
+
+    const updateData = {
+      projectName,
+      startDate,
+      endDate,
+      teamMembers: JSON.parse(teamMembers),
+      status // Include status in update data
+    };
+
+    if (req.file) {
+      updateData.projectImage = `/uploads/${req.file.filename}`;
+    }
+
+    const updatedProject = await Project.findByIdAndUpdate(req.params.id, updateData, { new: true });
+    res.json(updatedProject);
+  } catch (error) {
+    console.error('Error updating project:', error);
+    res.status(500).json({ error: 'Error updating project' });
+  }
+});
+*/
+
+
+// Route to update an existing project
+router.put('/:id', upload.single('projectImage'), async (req, res) => {
+  try {
+    const { projectName, startDate, endDate, teamMembers, status } = req.body;
+
+    // Get the project manager details from the existing project
+    const existingProject = await Project.findById(req.params.id);
+    if (!existingProject) {
+      return res.status(404).json({ message: 'Project not found' });
+    }
+
+    const manager = {
+      email: existingProject.projectManager,
+      role: 'Project Manager'
+    };
+
+    // Combine the manager with new team members
+    const allTeamMembers = [manager, ...JSON.parse(teamMembers)];
+    
+    // Handle the project image update if a new image is uploaded
+    const updateData = {
+      projectName,
+      startDate,
+      endDate,
+      teamMembers: allTeamMembers,
+      status
+    };
+    
+    if (req.file) {
+      updateData.projectImage = `/uploads/${req.file.filename}`;
+    }
+
+    const updatedProject = await Project.findByIdAndUpdate(req.params.id, updateData, { new: true });
+
+    // Update UserProjects for each team member and create notifications
+    for (const member of allTeamMembers) {
+      // Find the user by email
+      const user = await User.findOne({ email: member.email });
+      if (user) {
+        await UserProjects.findOneAndUpdate(
+          { email: member.email },
+          { $addToSet: { projects: req.params.id } },
+          { upsert: true, new: true }
+        );
+
+        // Create notification for each team member
+        const message = `Project ${projectName} has been updated. You are assigned as ${member.role}`;
+        await createNotification(user._id, 'project', message);
+      } else {
+        console.error(`User with email ${member.email} not found`);
+      }
+    }
+
+    res.json(updatedProject);
+
+  } catch (error) {
+    console.error('Error updating project:', error);
+    res.status(500).json({ error: 'Error updating project' });
+  }
+});
+
 module.exports = router;
 

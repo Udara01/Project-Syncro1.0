@@ -1,0 +1,25 @@
+/* Compact styling for Recent Updates card */
+.compact-item {
+  padding: 0.5rem 0.75rem; /* Less padding for compact look */
+  font-size: 0.9rem; /* Smaller font size */
+}
+
+.compact-item strong {
+  font-size: 1rem; /* Slightly larger for titles */
+  display: inline-block;
+  max-width: 150px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis; /* Truncate long titles */
+}
+
+.compact-item small {
+  display: block;
+  color: #666;
+  font-size: 0.8rem; /* Smaller font for details */
+}
+
+.download-link {
+  font-size: 0.8rem;
+  margin-top: 2px;
+}

@@ -23,10 +23,12 @@ const Log = () => {
             setUser({ username, useremail, userId  });
             localStorage.setItem('user', JSON.stringify({ username, useremail, userId  }));
             navigate('/home');*/
+
+
         const res = await axios.post('http://localhost:4000/api/auth/login', { ...formData, email: email.toLowerCase() }, { withCredentials: true });
         console.log('Backend response:', res.data);
-        const { username, useremail, userId  } = res.data; // Updated to extract _id
-        const user = { username, useremail, userId };
+        const { username, useremail, userId,firstName, lastName, role, profilePicture, bio } = res.data; // Updated to extract _id
+        const user = { username, useremail, userId, firstName, lastName, role, profilePicture, bio  };
         console.log('User data being set:', user); // Debugging log
         setUser(user);
         localStorage.setItem('user', JSON.stringify(user));
