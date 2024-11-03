@@ -65,9 +65,9 @@ import RequirementList from './Modules/Requirements/Components/RequirementList';
 
 import PrioritizedList from './Modules/Requirements/Components/PrioritizedList';
 
-import TestingPage from './Modules/TestingandInitiation/Components/TestingPage';
+import TestingPage from './Modules/TestingandInitiation/Page/TestingPage';
 
-import DocumentManagement from './Modules/DocumentManagement/page/DocumentManagement';
+import DocumentManagement from './Modules/DocumentManagement/Components/DocumentManagement';
 
 import PrivateDocument from './Modules/DocumentManagement/Components/PrivateDocument';
 
@@ -109,6 +109,22 @@ import DesignUploadPage from './Modules/Design/Pages/DesignUploadPage';
 
 import DesignDownloadPage from './Modules/Design/Pages/DesignDownloadPage';
 
+import ProjectTeam from './Modules/Teams/Components/ProjectTeam';
+
+import ProjectDocument from './Modules/DocumentManagement/page/ProjectDocument';
+
+import ProjectTeamPage from './Modules/Teams/Page/ProjectTeamPage';
+
+import UserProfilePage from './Modules/UserManagement/Page/UserProfilePage';
+
+import UserStatus from './Modules/UserManagement/Components/UserStatus';
+
+import ClientPage from './Modules/ClientAccess/Page/ClientPage';
+
+import ChatPage from './Modules/Chat/Page/ChatPage';
+
+import MilestoneDisplayPage from './Modules/Milestone/Pages/MilestoneDisplayPage';
+
 function App() {
   return (
     <div className="App">
@@ -137,6 +153,8 @@ function App() {
       <Route path='/profile/:userId' element={<ProfilePage></ProfilePage>}></Route> 
 
       <Route path='/profile/calender/:userId' element={<UserCalendar></UserCalendar>}></Route> 
+
+      <Route path='/userStatus/:userId' element={<UserStatus></UserStatus>}></Route> 
 
 
       <Route path='/projects/:projectId/add-meeting' element={<Meet />} />
@@ -183,17 +201,19 @@ function App() {
 
     <Route path="/projects/:projectId/testing" element={<TestingPage />} />
     
-    <Route path="/projects/:projectId/documents" element={<DocumentManagement />} />
+    <Route path="/projects/:projectId/documents" element={<ProjectDocument />} />
 
     <Route path="/projects/:projectId/pridocuments" element={<PrivateDocument />} />
 
-    <Route path="/projects/:projectId/client" element={<ProjectProgress />} />
+    <Route path="/projects/:projectId/client" element={<ClientPage />} />
 
     <Route path="/projects/:projectId/milestoneForm" element={<MilestoneForm />} />
 
     <Route path="/projects/:projectId/project-planning" element={<ProjectPlan />} />
 
     <Route path="/projects/:projectId/milestone-List" element={<MilestoneListPage />} />
+
+    <Route path="/projects/:projectId/milestone-List-show" element={<MilestoneDisplayPage />} />
 
     <Route path="/projects/:projectId/CreateTask" element={<CreateTaskDashboard />} />
 
@@ -208,6 +228,12 @@ function App() {
     <Route path="/projects/:projectId/design" element={<DesignUploadPage />} />
 
     <Route path="/projects/:projectId/design/download" element={<DesignDownloadPage />} />
+
+    <Route path="/projects/:projectId/project-teem" element={<ProjectTeamPage />} />
+
+    <Route path="/userprofile/:userId" element={<UserProfilePage />} />
+
+    <Route path="/projects/:projectId/chat" element={<ChatPage />} />
 
 
 {/*Role base access control test*/}

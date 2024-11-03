@@ -180,6 +180,11 @@ router.post('/login', async (req, res) => {
             return res.status(400).json({ msg: 'The password you entered is incorrect.' });
         }
 
+        // Update online status and last active
+        user.isOnline = true;
+        user.lastActive = Date.now();
+        await user.save();
+
         const payload = { userId: user._id };
         const token = jwt.sign(payload, JWT_SECRET, { expiresIn: '1h' });
 
@@ -219,11 +224,42 @@ const authMiddleware = (req, res, next) => {
 };
 
 //Logout Process
-router.post('/logout', (req, res) => {
+/*router.post('/logout', (req, res) => {
     res.clearCookie('token');
     res.status(200).json({ message: 'Logged out successfully' });
 });
+*/
 
+// Logout Process
+router.post('/logout', async (req, res) => {
+    try {
+        // Retrieve token from cookies
+        const token = req.cookies.token;
+        if (!token) {
+            return res.status(401).json({ message: 'No token found, authorization denied' });
+        }
+
+        // Verify token to get user ID
+        const decoded = jwt.verify(token, JWT_SECRET);
+        const userId = decoded.userId;
+
+        // Update user's online status and last active timestamp
+        const user = await User.findById(userId);
+        if (user) {
+            user.isOnline = false;
+            user.lastActive = Date.now();
+            await user.save();
+            console.log(`User ${user.username} is now offline`);
+        }
+
+        // Clear token cookie
+        res.clearCookie('token');
+        res.status(200).json({ message: 'Logged out successfully' });
+    } catch (error) {
+        console.error("Logout error:", error.message);
+        res.status(500).json({ message: 'Server error during logout' });
+    }
+});
 
 router.get('/protected', authMiddleware, (req, res) => {
     res.status(200).json({ msg: 'This is a protected route' });

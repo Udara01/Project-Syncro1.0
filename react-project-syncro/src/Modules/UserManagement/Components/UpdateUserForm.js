@@ -185,7 +185,7 @@ const UpdateUserForm = () => {
   const [profilePicture, setProfilePicture] = useState(null);
   const [roles] = useState([
     'Project Manager', 'Product Owner', 'Business Analyst', 'Software Architect',
-    'Team Lead', 'Developers/Programmers', 'UX/UI Designers', 'Quality Assurance Testers', 'User',
+    'Team Lead', 'Developers/Programmers', 'UX/UI Designers', 'Quality Assurance Testers', 'User', 'Client',
   ]);
 
   const handleChange = (e) => {

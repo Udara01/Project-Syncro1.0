@@ -332,4 +332,3 @@ router.post('/createMeeting', async (req, res) => {
   }
 });*/
 
-module.exports = router;

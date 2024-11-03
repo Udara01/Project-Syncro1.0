@@ -25,7 +25,8 @@ const DashboardHome = () => {
   };
 
   const { user } = useContext(UserContext); // Adding user context
-
+  const hours = new Date().getHours();
+  const greeting = hours < 12 ? "Good morning" : hours < 18 ? "Good afternoon" : "Good evening";
 
 
   //Meeting part
@@ -54,10 +55,12 @@ const DashboardHome = () => {
         
         <div className="content">
         <Row className="mb-4">
-        <h1>Welcome to Syncro {user?.username}</h1>
-                <Col md={6}><ProjectsOverviewPie /></Col> 
-                <Col md={3}><QuickAccess /></Col>
-                <Col md={3}><RecentActivities /></Col>
+        <h1>{greeting}, {user?.username}! 👋 Welcome to Syncro</h1>
+        <p>We’re glad to see you. Let’s make today productive!</p>
+
+                <Col md={4}><ProjectsOverviewPie /></Col> 
+                <Col md={3} style={{ marginTop: '10px' }}><QuickAccess /></Col>
+                <Col md={5} style={{ marginTop: '7px' }}><RecentActivities /></Col>
             </Row>
             <Row>
                 <Col md={8}><TimeTracking /></Col>

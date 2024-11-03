@@ -48,10 +48,13 @@ const UserSchema = new mongoose.Schema({
         'UX/UI Designers',
         'Quality Assurance Testers',
         'User',
+        'Client',
       ],
       default: 'User',
     },
     bio: { type: String, default: '' },
+    isOnline: { type: Boolean, default: false },       // New field for online status
+    lastActive: { type: Date, default: Date.now },     // New field for tracking last activity
   });
   
 

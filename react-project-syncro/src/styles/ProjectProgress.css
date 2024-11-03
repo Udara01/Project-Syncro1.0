@@ -1,0 +1,31 @@
+.project-progress-container {
+  max-width: 1200px;
+  margin: auto;
+}
+
+.milestone-item {
+  background-color: #f0f8ff;
+  border-radius: 8px;
+  transition: transform 0.2s;
+}
+
+.milestone-item:hover {
+  transform: scale(1.03);
+}
+
+.milestone-title {
+  font-weight: bold;
+  color: #007bff;
+}
+
+.card-title {
+  font-size: 1.2rem;
+}
+
+.table {
+  margin-bottom: 0;
+}
+
+h2 {
+  color: #333;
+}

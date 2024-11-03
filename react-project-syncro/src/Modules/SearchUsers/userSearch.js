@@ -40,9 +40,9 @@ const UserSearch = ({ email, onUserFound }) => {
     <div style={{ marginTop: '20px' }}>
       {loading && <Spinner animation="border" />}
       {user && (
-        <Alert variant="success" style={{ marginTop: '20px' }}>
-          <h4>User Details</h4>
-          <p>Email: {user.email}</p>
+        <Alert variant="success" style={{ marginTop: '20px', backgroundColor: '#d4edda', borderColor:"#d4edda" }}>
+          <h4 style={{ color: "Black", backgroundColor: '#d4edda'}}>User Details</h4>
+          <p style={{ color: "Black", backgroundColor: '#d4edda'}}>Email: {user.email}</p>
           {/* Display other user information as needed */}
         </Alert>
       )}

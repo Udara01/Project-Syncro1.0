@@ -150,5 +150,39 @@ router.get('/users/profile/:id', async (req, res) => {
   }
 });
 
+
+
+router.get('/users/status/:id', async (req, res) => {
+  try {
+    const user = await User.findById(req.params.id);
+    if (user) {
+      res.json({ isOnline: user.isOnline, lastActive: user.lastActive });
+    } else {
+      res.status(404).send('User not found');
+    }
+  } catch (error) {
+    res.status(500).send('Server error');
+  }
+});
+
+
+
+// routes/user.js
+router.put('/users/upstatus/:userId', async (req, res) => {
+  try {
+    const user = await User.findById(req.params.id);
+    if (user) {
+      user.lastActive = Date.now();
+      await user.save();
+      res.status(200).json({ message: 'Status updated successfully' });
+    } else {
+      res.status(404).json({ message: 'User not found' });
+    }
+  } catch (error) {
+    console.error('Error updating status:', error);
+    res.status(500).json({ message: 'Server error' });
+  }
+});
+
 module.exports = router;
 

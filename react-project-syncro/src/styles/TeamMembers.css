@@ -1,0 +1,71 @@
+/* Main Card Container */
+.team-members-card {
+  background: linear-gradient(135deg, #007bff 30%, #6610f2 100%);
+  color: #ffffff;
+  border-radius: 10px;
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15);
+}
+
+
+.team-members-header {
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: #ffffff; /* Ensure the text color stands out */
+  text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.3); /* Add shadow for better readability */
+  margin-bottom: 1rem;
+}
+
+
+/* List Group */
+.list-group-item {
+  background: #f8f9fa;
+  border: none;
+  border-radius: 8px;
+  margin-bottom: 8px;
+  padding: 15px;
+  transition: transform 0.2s ease;
+}
+
+.list-group-item:hover {
+  transform: translateY(-2px);
+  background: #e9ecef;
+}
+
+/* Member Name and Role */
+.list-group-item p {
+  margin: 0;
+}
+
+.list-group-item .font-weight-bold {
+  font-size: 1.2rem;
+  color: #007bff;
+}
+
+.list-group-item .text-secondary {
+  font-size: 0.9rem;
+  color: #6c757d;
+}
+
+/* Link Styling */
+.text-primary {
+  color: #007bff;
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+.text-primary:hover {
+  color: #0056b3;
+  text-decoration: underline;
+}
+
+/* Message Icon */
+.fa-envelope {
+  font-size: 1.3rem;
+  cursor: pointer;
+  transition: transform 0.2s ease, color 0.2s ease;
+}
+
+.fa-envelope:hover {
+  color: #6610f2;
+  transform: scale(1.2);
+}

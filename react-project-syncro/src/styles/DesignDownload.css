@@ -1,0 +1,36 @@
+.avatar-circle {
+    width: 35px;
+    height: 35px;
+    background-color: #007bff;
+    color: #ffffff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    font-weight: bold;
+    font-size: 16px;
+}
+
+
+
+.comment-content {
+    background-color: #f6f5f5;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+.comment-header {
+    font-size: 0.85rem;
+    color: #6c757d;
+}
+
+.comment-content strong {
+    color: #007bff;
+}
+
+button {
+    transition: background-color 0.3s ease;
+}
+
+button:hover {
+    background-color: #0056b3;
+}

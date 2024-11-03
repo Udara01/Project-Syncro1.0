@@ -103,7 +103,7 @@
 }
 
 .task-list table th {
-  background-color: #4a90e2;
+  background-color: #0e71e2;
   color: white;
   text-transform: uppercase;
   font-size: 0.9rem;
@@ -127,7 +127,7 @@
 
 .task-list .btn-primary {
   margin-bottom: 20px;
-  background-color: #4a90e2;
+  background-color: #0e71e2;
   border: none;
   padding: 10px 20px;
   border-radius: 4px;
@@ -177,4 +177,86 @@
 
 .task-list .form-group {
   margin-bottom: 16px;
+}
+
+
+/* Main Task List Card */
+.task-list-card {
+  border: none;
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+/* Task List Header */
+.task-list-header {
+  background: linear-gradient(135deg, #007bff, #6610f2);
+  padding: 10px 15px;
+  font-size: 1.2rem;
+  font-weight: 600;
+  text-shadow: 1px 1px 5px rgba(0, 0, 0, 0.2);
+}
+
+/* Task Item Styling */
+.task-item {
+  border-bottom: 1px solid #e9ecef;
+  padding-bottom: 12px;
+  margin-bottom: 12px;
+}
+
+.task-title {
+  font-size: 1rem;
+  font-weight: bold;
+  color: #333;
+}
+
+.task-desc {
+  font-size: 0.9rem;
+  color: #6c757d;
+}
+
+.task-due {
+  font-size: 0.85rem;
+  font-weight: 500;
+  color: #495057;
+}
+
+.task-due span {
+  color: #007bff;
+  font-weight: 600;
+}
+
+/* No Tasks Message */
+.no-tasks {
+  text-align: center;
+  font-size: 1rem;
+  color: #6c757d;
+  padding: 10px;
+}
+
+/* View All Link */
+.view-all-link {
+  display: block;
+  margin-top: 15px;
+  text-align: right;
+  color: #007bff;
+  font-weight: 500;
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+.view-all-link:hover {
+  color: #0056b3;
+  text-decoration: underline;
+}
+
+
+/* Countdown Timer */
+.task-remaining {
+  font-size: 0.9rem;
+  font-weight: 500;
+  color: #dc3545;
+}
+
+.task-remaining span {
+  font-weight: 600;
 }
