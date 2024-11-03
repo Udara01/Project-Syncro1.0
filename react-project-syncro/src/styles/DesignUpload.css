@@ -1,0 +1,47 @@
+/* Enhanced styling for the component */
+
+.card {
+  border-radius: 10px;
+}
+
+.comment-item {
+  background-color: #f8f9fa;
+  padding: 5px 10px;
+  border-radius: 6px;
+  margin-bottom: 5px;
+  font-size: 0.9rem;
+}
+
+.comment-user {
+  color: #007bff;
+}
+
+.table {
+  border-collapse: separate;
+  border-spacing: 0 0.75rem;
+}
+
+.table thead th {
+  background-color: #007bff;
+  color: white;
+  text-align: center;
+}
+
+.table-hover tbody tr:hover {
+  background-color: #f1f3f5;
+}
+
+.list-unstyled {
+  max-height: 1200px;
+  overflow-y: auto;
+}
+
+.button {
+  display: flex;
+  align-items: center;
+}
+
+button.mt-2 {
+  margin-top: 10px;
+  border-radius: 8px;
+}

@@ -1,0 +1,60 @@
+.upload-container {
+  max-width: 500px;
+  margin: 0 auto;
+  padding: 20px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  background-color: #fff;
+}
+
+.file-drop-zone {
+  border: 2px dashed #ccc;
+  padding: 20px;
+  text-align: center;
+  margin-bottom: 20px;
+  border-radius: 8px;
+  position: relative;
+}
+
+.file-input {
+  opacity: 0;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  cursor: pointer;
+}
+
+.file-drop-zone p {
+  margin: 0;
+  color: #666;
+}
+
+.browse-link {
+  color: #007bff;
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+.file-preview {
+  margin-top: 10px;
+  color: #333;
+}
+
+.button-group {
+  display: flex;
+  gap: 10px;
+  margin-top: 20px;
+}
+
+.upload-button {
+  flex: 1;
+}
+
+.cancel-button {
+  flex: 5;
+  width: 460px;
+  background-color: #c3171a;
+  color: #fff;
+}

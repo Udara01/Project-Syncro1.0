@@ -289,9 +289,14 @@ useEffect(() => {
     setRole('Product Owner');
   };
 
-  const handleRemoveMember = (emailToRemove) => {
-    setTeamMembers(teamMembers.filter(member => member.email !== emailToRemove));
+  const handleRemoveMember = (emailToRemove, roleToRemove) => {
+    setTeamMembers(
+      teamMembers.filter(
+        (member) => !(member.email === emailToRemove && member.role === roleToRemove)
+      )
+    );
   };
+  
 
 // Add status to the form data in handleSubmit
 const handleSubmit = async (e) => {
@@ -384,7 +389,7 @@ const handleSubmit = async (e) => {
                       <span>{member.email} ({member.role})</span>
                       <Button
                         variant="danger"
-                        onClick={() => handleRemoveMember(member.email)}
+                        onClick={() => handleRemoveMember(member.email, member.role)}
                         className="ml-2"
                       >
                         Remove

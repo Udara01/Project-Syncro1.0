@@ -1,8 +1,9 @@
+/* Main Timeline Container */
 .timeline {
   position: relative;
-  padding: 20px 0;
-  list-style: none;
+  padding: 30px 0;
   margin: 0;
+  list-style: none;
 }
 
 .timeline::before {
@@ -10,15 +11,16 @@
   position: absolute;
   top: 0;
   bottom: 0;
-  width: 2px;
-  background: #007bff;
+  width: 3px;
+  background: linear-gradient(180deg, #007bff, #6610f2);
   left: 50%;
-  margin-left: -1px;
+  transform: translateX(-50%);
 }
 
+/* Timeline Item */
 .timeline-item {
   position: relative;
-  margin: 20px 0;
+  margin: 30px 0;
   text-align: center;
 }
 
@@ -28,24 +30,33 @@
   top: 15px;
   left: 50%;
   transform: translateX(-50%);
-  width: 20px;
-  height: 20px;
+  width: 24px;
+  height: 24px;
   border-radius: 50%;
-  background: #fff;
-  border: 3px solid #007bff;
+  background: linear-gradient(135deg, #007bff 30%, #6610f2 100%);
+  border: 3px solid #ffffff;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.15);
   z-index: 1;
 }
 
+/* Timeline Content */
 .timeline-content {
   position: relative;
   padding: 20px;
   background: #f8f9fa;
-  border-radius: 5px;
+  border-radius: 8px;
   width: 45%;
-  z-index: 2;
   border: 1px solid #ddd;
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+  transition: transform 0.2s ease;
 }
 
+.timeline-content:hover {
+  transform: translateY(-5px);
+  background: #e9ecef;
+}
+
+/* Aligning Content Left and Right */
 .timeline-item:nth-child(odd) .timeline-content {
   left: -5%;
 }
@@ -55,13 +66,19 @@
 }
 
 .timeline-item h5 {
+  font-size: 1.3rem;
+  font-weight: bold;
+  color: #007bff;
+  text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.1);
   margin-bottom: 0.5rem;
 }
 
 .timeline-item p {
-  margin-bottom: 0;
+  font-size: 1rem;
+  color: #6c757d;
 }
 
+/* Arrow Indicators */
 .timeline-item:nth-child(odd) .timeline-content::after {
   content: '';
   position: absolute;
@@ -84,4 +101,25 @@
   border-style: solid;
   border-width: 10px 10px 10px 0;
   border-color: transparent #f8f9fa transparent transparent;
+}
+
+/* Responsive Adjustments */
+@media (max-width: 768px) {
+  .timeline {
+    padding-left: 15px;
+  }
+
+  .timeline-item::before {
+    top: -15px;
+  }
+
+  .timeline-item:nth-child(odd) .timeline-content,
+  .timeline-item:nth-child(even) .timeline-content {
+    width: 90%;
+    left: 0;
+  }
+
+  .timeline-item:nth-child(even) .timeline-content::after {
+    left: -20px;
+  }
 }

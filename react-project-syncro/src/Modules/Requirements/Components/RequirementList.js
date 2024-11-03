@@ -156,30 +156,39 @@ const PrioritizedCommentSubmit = async (PrioritizedID) => {
                         <td>{requirement.priority}</td>
                         <td>{requirement.description}</td>
                         <td>
-                          <ul className="comment-list">
-                            {requirement.comments.map((comment, i) => (
-                              <li key={i} className="mb-1">
-                                <strong>{comment.userEmail}</strong>: {comment.commentText}
-                              </li>
-                            ))}
-                          </ul>
-                          <Form>
+                        <div className="comment-section">
+                          {requirement.comments.map((comment, i) => (
+                            <div key={i} className="comment">
+                              <div className="comment-avatar">
+                                {comment.userEmail[0].toUpperCase()}
+                              </div>
+                              <div className="comment-content">
+                                <div className="comment-header">
+                                  <span className="comment-user">{comment.userEmail}</span>
+                                  <span className="comment-timestamp">{new Date(comment.createdAt).toLocaleString()}</span>
+                                </div>
+                                <p className="comment-text">{comment.commentText}</p>
+                              </div>
+                            </div>
+                          ))}
+                          <Form className="comment-form">
                             <Form.Control
                               type="text"
                               placeholder="Add a comment"
                               value={commentText[requirement._id] || ""}
-                              onChange={(e) => handleCommentChange(requirement._id, e.target.value)}
+                              onChange={(e) => setCommentText(prev => ({ ...prev, [requirement._id]: e.target.value }))}
                               className="mt-2"
                             />
                             <Button
                               variant="primary"
                               size="sm"
                               onClick={() => handleCommentSubmit(requirement._id)}
-                              className="mt-1"
+                              className="mt-2" style={{ marginBottom: '29px' }}
                             >
                               Submit
                             </Button>
                           </Form>
+                        </div>
                         </td>
                         <td>
                           {requirement.fileName.map((file, i) => (
@@ -274,7 +283,7 @@ const PrioritizedCommentSubmit = async (PrioritizedID) => {
                         </Badge>
                       </td>
                       <td>{priority.description}</td>
-                      <td>
+                     {/* <td>
                         <ListGroup variant="flush" className="comment-list">
                           {priority.comments.map((comment, i) => (
                             <ListGroup.Item key={i} className="border-0 px-1 py-2">
@@ -294,6 +303,41 @@ const PrioritizedCommentSubmit = async (PrioritizedID) => {
                               size="sm"
                               onClick={() => PrioritizedCommentSubmit(priority._id)}
                               className="mt-1"
+                            >
+                              Submit
+                            </Button>
+                          </Form>
+                        </ListGroup>
+                      </td>*/}
+                                            <td>
+                        <ListGroup variant="flush" className="comment-list">
+                          {priority.comments.map((comment, i) => (
+                            <ListGroup.Item key={i} className="border-0 px-1 py-2 d-flex align-items-start">
+                              <div className="comment-avatar">
+                                {comment.userEmail[0].toUpperCase()}
+                              </div>
+                              <div className="comment-content">
+                                <div className="comment-header">
+                                  <strong className="comment-user">{comment.userEmail}</strong>
+                                  <span className="comment-timestamp">{new Date(comment.createdAt).toLocaleString()}</span>
+                                </div>
+                                <p className="comment-text">{comment.commentText}</p>
+                              </div>
+                            </ListGroup.Item>
+                          ))}
+                          <Form className="comment-form mt-3 d-flex">
+                            <Form.Control
+                              type="text"
+                              placeholder="Ask a question"
+                              value={commentText[priority._id] || ""}
+                              onChange={(e) => handlePrioritizedCommentChange(priority._id, e.target.value)}
+                              className="comment-input"
+                            />
+                            <Button
+                              variant="outline-primary"
+                              size="sm"
+                              onClick={() => PrioritizedCommentSubmit(priority._id)}
+                              className="comment-submit-button ms-2"  style={{ marginBottom: '29px' }}
                             >
                               Submit
                             </Button>

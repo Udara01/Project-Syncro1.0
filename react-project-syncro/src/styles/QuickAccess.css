@@ -1,0 +1,29 @@
+.quick-access-card {
+  width: 220px;
+  margin: 0 auto;
+  border: none;
+  background-color: #f9f9f9;
+}
+
+.quick-access-item {
+  padding: 10px 15px;
+  transition: background-color 0.2s ease;
+}
+
+.quick-access-item:hover {
+  background-color: #e2e6ea;
+}
+
+.quick-access-item .quick-access-icon {
+  font-size: 1.2em;
+  color: #0d6efd;
+}
+
+.quick-access-item.active {
+  background-color: #e2e6ea;
+  font-weight: bold;
+}
+
+.quick-access-item.active .quick-access-icon {
+  color: #0b5ed7;
+}

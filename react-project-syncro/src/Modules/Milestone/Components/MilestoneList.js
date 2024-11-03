@@ -95,16 +95,19 @@ function MilestoneList() {
   const { projectId } = useParams();
 
   useEffect(() => {
+
     const fetchMilestones = async () => {
       try {
         const response = await axios.get(`http://localhost:4000/api/projects/${projectId}/milestones`);
-        setMilestones(response.data);
+        setMilestones(response.data); // Emails are now directly in assignedTeam
       } catch (error) {
         console.error('Error fetching milestones:', error);
       }
     };
-    fetchMilestones();
+    fetchMilestones();    
   }, [projectId]);
+
+
 
   const markComplete = async (id) => {
     setMilestones((prevMilestones) =>
@@ -150,7 +153,7 @@ function MilestoneList() {
               <ListGroup.Item className="border-0">
                 <strong>Assigned Team:</strong>
               </ListGroup.Item>
-              {milestone.assignedTeam.map((member, index) => (
+              {milestone.assignedTeamEmail.map((member, index) => (
                 <ListGroup.Item key={index} className="d-flex align-items-center border-0">
                   <FaUser className="me-2 text-primary" />
                   {member}

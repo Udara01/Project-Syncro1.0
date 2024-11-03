@@ -239,8 +239,12 @@ const CreateProject = ({ onProjectCreated }) => {
     setRole('Product Owner');
   };
 
-  const handleRemoveMember = (emailToRemove) => {
-    setTeamMembers(teamMembers.filter(member => member.email !== emailToRemove));
+  const handleRemoveMember = (emailToRemove, roleToRemove) => {
+    setTeamMembers(
+      teamMembers.filter(
+        (member) => !(member.email === emailToRemove && member.role === roleToRemove)
+      )
+    );
   };
 
   const handleSubmit = async (e) => {
@@ -383,7 +387,13 @@ const CreateProject = ({ onProjectCreated }) => {
                                 <strong>{member.email}</strong> - {member.role}
                               </Col>
                               <Col md="auto">
-                                <Button variant="danger" onClick={() => handleRemoveMember(member.email)}>Remove</Button>
+                              <Button
+                        variant="danger"
+                        onClick={() => handleRemoveMember(member.email, member.role)}
+                        className="ml-2"
+                      >
+                        Remove
+                      </Button>
                               </Col>
                             </Row>
                           </ListGroup.Item>
@@ -395,10 +405,10 @@ const CreateProject = ({ onProjectCreated }) => {
               </Col>
             </Row>
 
-            <Button variant="success" type="submit" className="mr-2">
+            <Button variant="success" type="submit"  className="me-4">
               Create
             </Button>
-            <Button variant="secondary" type="button">
+            <Button variant="secondary" type="button" className="me-2">
               Cancel
             </Button>
           </Form>
@@ -416,7 +426,7 @@ const CreateProject = ({ onProjectCreated }) => {
         <Modal.Footer>
           <Button variant="primary" onClick={handleModalClose}>
             OK
-          </Button>
+          </Button>         
         </Modal.Footer>
       </Modal>
     </div>

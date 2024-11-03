@@ -226,9 +226,9 @@ const Navbarmain = ({ toggleSidebar, isSidebarOpen }) => {
           <NavDropdown
             title={<AiOutlineUser style={{ fontSize: '24px' }} />}
             id="basic-nav-dropdown"
-            alignRight
-          >
-            <NavDropdown.Item href={`/profile/${userId}`}>{user?.username}</NavDropdown.Item>
+            alignRight         
+          >                     
+            <NavDropdown.Item href={`/userprofile/${userId}`}>{user?.username}</NavDropdown.Item>
             <NavDropdown.Divider />
             <NavDropdown.Item onClick={handleLogout}>Log out</NavDropdown.Item>
           </NavDropdown>

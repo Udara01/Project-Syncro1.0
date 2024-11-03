@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useContext } from 'react';
+/*import React, { useEffect, useState, useContext } from 'react';
 import { useParams, useNavigate, Link } from 'react-router-dom';
 import axios from 'axios';
 import Navbarmain from '../../../Components/Layouts/Navbarmain';
@@ -13,7 +13,7 @@ import FileUpload from '../Components/FileUpload';
 import TeamMembers from '../Components/TeamMembers';
 import { UserContext } from '../../../contexts/UserContext'; // Import UserContext
 import '../../../styles/ProjectDashboard.css';
-
+import PrivateDocument from '../../DocumentManagement/Components/PrivateDocument';
 
 function Dashboard() {
   const [isSidebarOpen, setIsSidebarOpen] = useState(true);
@@ -77,7 +77,7 @@ function Dashboard() {
       <Sidebar isSidebarOpen={isSidebarOpen} show={true} projectId={projectId} />
 
         <div className="content" style={{ marginLeft: isSidebarOpen ? '0px' : '-10px', marginTop: '56px', padding: '20px' }}>
-          <ProjectNavbar userRoles={userRoles} projectId={projectId} /> {/* Pass userRoles and projectId as props to the ProjectNavbar */}
+          <ProjectNavbar userRoles={userRoles} projectId={projectId} /> {/* Pass userRoles and projectId as props to the ProjectNavbar *//*}
 {/*
            Role-based access control test 
           {userRoles.includes('Project Manager') && (
@@ -93,21 +93,11 @@ function Dashboard() {
 
           <Link to={`/projects/${projectId}/create-meeting`}>Create a New Meeting2</Link>
 <br></br>
-          <Link to={`/projects/${projectId}/taskCreat`}>Create a New task</Link> */}
+          <Link to={`/projects/${projectId}/taskCreat`}>Create a New task</Link> 
         
 
 
-         <Link to={`/projects/${projectId}/sprints`}>Project Plan</Link> <br></br>
-
-         <Link to={`/projects/${projectId}/gantt`}>Gantt</Link> <br></br>
-
-         <Link to={`/projects/${projectId}/taskassign`}>TaskAssignModal</Link> <br></br>
-
-         <Link to={`/projects/${projectId}/ParentComponent`}>ParentComponent</Link> <br></br>
-
-
-         <Link to={`/projects/${projectId}/tasks`}>ParentComponent</Link> <br></br>
-   
+         <Link to={`/projects/${projectId}/sprints`}>Project Plan</Link> <br></br>*//*}
 
           <div className="container">
             <div className="row">
@@ -120,8 +110,8 @@ function Dashboard() {
               <div className="col-md-4">
                 <br></br>
                 <h1>{project.projectName}</h1>
-              {/*  <p>Project ID: {projectId}</p>
-                <p>Roles Of Project: {userRoles.join(' | ')}</p> Display all user roles */}
+
+                <p>Roles Of Project: {userRoles.join(' | ')}</p>
 
               </div>
 
@@ -130,6 +120,119 @@ function Dashboard() {
                 <TeamMembers />
               </div>
             </div>
+            <div className="row">
+              <div className="col-md-12">
+                <FileUpload />
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <Footer />
+    </div>
+  );
+}
+
+export default Dashboard;*/
+
+
+import React, { useEffect, useState, useContext } from 'react';
+import { useParams, Link } from 'react-router-dom';
+import axios from 'axios';
+import Navbarmain from '../../../Components/Layouts/Navbarmain';
+import Sidebar from '../../../Components/Layouts/SidebarHome';
+import Footer from '../../../Components/Layouts/Footer';
+import ProjectNavbar from '../../../Components/Layouts/ProjectNavbar';
+import ProjectOverview from '../Components/ProjectOverview';
+import CustomCalendar from '../Components/Calendar';
+import TaskList from '../Components/TaskList';
+import Timeline from '../Components/Timeline';
+import FileUpload from '../Components/FileUpload';
+import TeamMembers from '../Components/TeamMembers';
+import { UserContext } from '../../../contexts/UserContext';
+import '../../../styles/ProjectDashboard.css';
+import PrivateDocument from '../../DocumentManagement/Components/PrivateDocument';
+import { Card, Col, Row } from 'react-bootstrap';
+
+function Dashboard() {
+  const [isSidebarOpen, setIsSidebarOpen] = useState(true);
+  const toggleSidebar = () => setIsSidebarOpen(!isSidebarOpen);
+  const { projectId } = useParams();
+  const [project, setProject] = useState(null);
+  const [error, setError] = useState(null);
+  const [userRoles, setUserRoles] = useState([]);
+  const { user } = useContext(UserContext);
+
+  useEffect(() => {
+    const fetchProject = async () => {
+      try {
+        const response = await axios.get(`http://localhost:4000/api/projects/${projectId}`);
+        setProject(response.data);
+
+        const currentUserEmail = user.useremail;
+        const roles = response.data.teamMembers
+          .filter(member => member.email === currentUserEmail)
+          .map(member => member.role);
+
+        setUserRoles(roles.length > 0 ? roles : ['No roles assigned']);
+      } catch (err) {
+        setError(err.response && err.response.status === 403 ? 'Access denied' : 'Error fetching project');
+      }
+    };
+
+    fetchProject();
+  }, [projectId, user.useremail]);
+
+  if (error) {
+    return <div className="alert alert-danger">{error}</div>;
+  }
+
+  if (!project) {
+    return <div className="text-center mt-5">Loading...</div>;
+  }
+
+  return (
+    <div className="Home">
+      <Navbarmain toggleSidebar={toggleSidebar} isSidebarOpen={isSidebarOpen} />
+      <div className={`main-container ${isSidebarOpen ? 'sidebar-open' : 'sidebar-closed'}`}>
+        <Sidebar isSidebarOpen={isSidebarOpen} show={true} projectId={projectId} />
+        <div className="content" style={{ marginLeft: isSidebarOpen ? '0px' : '-10px', marginTop: '56px', padding: '20px' }}>
+          <ProjectNavbar userRoles={userRoles} projectId={projectId} />
+
+          <div className="container mt-4">
+            <div className="row">
+              <div className="col-md-4 mb-3">
+                <ProjectOverview />
+                <CustomCalendar />
+                <div className='time' style={{  }}>
+                <Timeline />
+                </div>
+                
+              </div>
+              
+              <div className="col-md-4 mb-3 text-center" style={{ marginTop: '25px' }}>
+                <div className="project-info-card shadow-sm p-4 rounded">
+                  <h2 className="project-title mb-3">{project.projectName}</h2>
+                  <p className="project-roles">Roles in Project</p>
+                  <div className="role-badges">
+                    {userRoles.map((role, index) => (
+                      <span key={index} className="badge role-badge">
+                        {role}
+                      </span>
+                    ))}
+                  </div>
+                </div>
+              </div>
+
+    
+
+              <div className="col-md-4 mb-3" >
+                <TaskList />
+                <TeamMembers />
+                
+              </div>
+            </div>
+
             <div className="row">
               <div className="col-md-12">
                 <FileUpload />

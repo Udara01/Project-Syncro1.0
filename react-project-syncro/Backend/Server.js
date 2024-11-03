@@ -127,6 +127,8 @@ const githubRoutes = require('./Routers/githubRoutes');
 
 const ActivityOverviewRoute = require('./Routers/activityOverview')
 
+const ChatRoute = require('./Routers/chat')
+
 const bodyParser = require('body-parser');
 const app = express();
 const PORT = 4000;
@@ -201,7 +203,7 @@ app.use('/api', githubRoutes);
 
 app.use('/api', ActivityOverviewRoute);
 
-
+app.use('/api', ChatRoute);
 
 
 

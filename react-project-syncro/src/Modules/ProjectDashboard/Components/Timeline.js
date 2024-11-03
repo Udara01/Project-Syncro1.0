@@ -76,7 +76,8 @@ const Timeline = () => {
   }, [projectId]);
 
   return (
-    <div className="container my-5">
+    <div className="container my-5" >
+      <h4 className="mb-4 text-primary">Project Milestones</h4>
       <div className="timeline">
         {milestones.map((milestone, index) => (
           <div key={index} className="timeline-item">

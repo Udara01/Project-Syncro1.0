@@ -30,9 +30,13 @@ const ProjectNavbar = ({ userRoles, projectId }) => { //in here projectNavbar is
               <Dropdown.Item href={`/projects/${projectId}/milestone-List`}>project Milestones</Dropdown.Item>
 
              {/* <Dropdown.Item href={`/projects/${projectId}/gantt`}>Gantt Chart</Dropdown.Item>/    */}
+
+             <Dropdown.Item href={`/projects/${projectId}/milestone-List-show`}>project Milestones</Dropdown.Item>
+
+
             </Dropdown.Menu>      
 
-          </Dropdown>                 
+          </Dropdown>                  
         </Nav.Item>
         <Nav.Item>
           <Dropdown as={Nav.Item}>
@@ -94,7 +98,7 @@ const ProjectNavbar = ({ userRoles, projectId }) => { //in here projectNavbar is
           <Dropdown as={Nav.Item}>
             <Dropdown.Toggle as={Nav.Link} className="nav-link-custom">
               Documents
-            </Dropdown.Toggle>          
+            </Dropdown.Toggle>         
             <Dropdown.Menu>         
               <Dropdown.Item href={`/projects/${projectId}/documents`}>Project Documents</Dropdown.Item>
               <Dropdown.Item href={`/projects/${projectId}/pridocuments`}>My Document</Dropdown.Item>
