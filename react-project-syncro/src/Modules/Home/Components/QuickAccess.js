@@ -18,7 +18,7 @@ const QuickAccess = () => {
                         </Link>
                     </ListGroup.Item>
                     <ListGroup.Item className={`quick-access-item ${location.pathname === '/teams' ? 'active' : ''}`}>
-                        <Link to="/teams" className="text-decoration-none d-flex align-items-center">
+                        <Link to="/userTeams" className="text-decoration-none d-flex align-items-center">
                             <FaUsers className="me-2 quick-access-icon" /> My Teams
                         </Link>
                     </ListGroup.Item>

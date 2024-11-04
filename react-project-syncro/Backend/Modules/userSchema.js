@@ -40,7 +40,6 @@ const UserSchema = new mongoose.Schema({
       type: String,
       enum: [
         'Project Manager',
-        'Product Owner',
         'Business Analyst',
         'Software Architect',
         'Team Lead',

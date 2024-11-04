@@ -178,13 +178,13 @@ const UpdateUserForm = () => {
     lastName: user?.lastName || '',
     username: user?.username || '',
     email: user?.useremail || '',
-    role: 'User',
+    role: user?.role,
     bio: user?.bio || '',
   });
 
   const [profilePicture, setProfilePicture] = useState(null);
   const [roles] = useState([
-    'Project Manager', 'Product Owner', 'Business Analyst', 'Software Architect',
+    'Project Manager', 'Business Analyst', 'Software Architect',
     'Team Lead', 'Developers/Programmers', 'UX/UI Designers', 'Quality Assurance Testers', 'User', 'Client',
   ]);
 

@@ -225,7 +225,7 @@ function MilestoneForm() {
             <Form.Check
               key={user._id}
               type="checkbox"
-              label={`${user.name} - ${user.role} (${user.email})`}
+              label={`${user.role} (${user.email})`}
               value={user.email}
               checked={assignedTeam.includes(user.email)}
               onChange={() => handleCheckboxChange(user.email)}

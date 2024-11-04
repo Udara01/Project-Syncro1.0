@@ -1,4 +1,3 @@
-// models/UserProjects.js
 //when project create and members adding to it this table store the the user allocated all project objectID
 
 const mongoose = require('mongoose');
