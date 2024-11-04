@@ -9,7 +9,7 @@ const teamMemberSchema = new mongoose.Schema({
   },
   role: {
     type: String,
-    enum: ['Project Manager', 'Product Owner', 'Business Analyst', 'Software Architect', 'Team Lead', 'Developers/Programmers', 'UX/UI Designers', 'Quality Assurance Testers', 'Client'],
+    enum: ['Project Manager', 'Business Analyst', 'Software Architect', 'Team Lead', 'Developers/Programmers', 'UX/UI Designers', 'Quality Assurance Testers', 'Client'],
     required: true
   }
 });

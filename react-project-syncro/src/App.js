@@ -125,6 +125,8 @@ import ChatPage from './Modules/Chat/Page/ChatPage';
 
 import MilestoneDisplayPage from './Modules/Milestone/Pages/MilestoneDisplayPage';
 
+import UserTeamsPage from './Modules/Teams/Page/UserTeamsPage';
+
 function App() {
   return (
     <div className="App">
@@ -156,6 +158,7 @@ function App() {
 
       <Route path='/userStatus/:userId' element={<UserStatus></UserStatus>}></Route> 
 
+      <Route path="/userTeams" element={<UserTeamsPage />} />
 
       <Route path='/projects/:projectId/add-meeting' element={<Meet />} />
 
@@ -234,6 +237,8 @@ function App() {
     <Route path="/userprofile/:userId" element={<UserProfilePage />} />
 
     <Route path="/projects/:projectId/chat" element={<ChatPage />} />
+
+   
 
 
 {/*Role base access control test*/}

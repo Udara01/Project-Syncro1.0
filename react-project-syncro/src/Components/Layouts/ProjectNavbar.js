@@ -45,12 +45,13 @@ const ProjectNavbar = ({ userRoles, projectId }) => { //in here projectNavbar is
             </Dropdown.Toggle>
             <Dropdown.Menu>
            {/*   {userRoles.includes('Product Owner') && (
-              <Dropdown.Item as={Link} to={`/prioritize-requirements/${projectId}`}>Prioritize Requirements</Dropdown.Item>)}*/} 
+              <Dropdown.Item as={Link} to={`/prioritize-requirements/${projectId}`}>Prioritize Requirements</Dropdown.Item>)}
 
               {userRoles.includes('Business Analyst') && (
               <Dropdown.Item as={Link} to={`/projects/${projectId}/requirement`}>Project Requirements</Dropdown.Item>)}
+*/} 
 
-              {userRoles.includes('Product Owner') && (
+              {userRoles.includes('Business Analyst') && (
               <Dropdown.Item as={Link} to={`/projects/${projectId}/requirementlist`}>Project Requirements</Dropdown.Item>)}
 
               <Dropdown.Item as={Link} to={`/projects/${projectId}/prioritylist`}>Prioritized Requirements</Dropdown.Item>

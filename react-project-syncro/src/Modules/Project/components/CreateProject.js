@@ -25,7 +25,7 @@ const CreateProject = ({ onProjectCreated }) => {
   const [image, setImage] = useState(null);
   const [teamMembers, setTeamMembers] = useState([]);
   const [email, setEmail] = useState('');
-  const [role, setRole] = useState('Product Owner');
+  const [role, setRole] = useState('Business Analyst');
   const [noOfTeamMembers, setNoOfTeamMembers] = useState('1 - 3');
   const [userExists, setUserExists] = useState(false);
 
@@ -149,7 +149,7 @@ const CreateProject = ({ onProjectCreated }) => {
                   title={role}
                   onSelect={(role) => setRole(role)}
                 >
-                  <Dropdown.Item eventKey="Product Owner">Product Owner</Dropdown.Item>
+                  <Dropdown.Item eventKey="Business Analyst">Business Analyst</Dropdown.Item>
                   <Dropdown.Item eventKey="Business Analyst">Business Analyst</Dropdown.Item>
                   <Dropdown.Item eventKey="Software Architect">Software Architect</Dropdown.Item>
                   <Dropdown.Item eventKey="Team Lead">Team Lead</Dropdown.Item>
@@ -216,7 +216,7 @@ const CreateProject = ({ onProjectCreated }) => {
   const [image, setImage] = useState(null);
   const [teamMembers, setTeamMembers] = useState([]);
   const [email, setEmail] = useState('');
-  const [role, setRole] = useState('Product Owner');
+  const [role, setRole] = useState('Business Analyst');
   const [noOfTeamMembers, setNoOfTeamMembers] = useState('1 - 3');
   const [userExists, setUserExists] = useState(false);
   const [showSuccessModal, setShowSuccessModal] = useState(false);
@@ -236,7 +236,7 @@ const CreateProject = ({ onProjectCreated }) => {
     const newMember = { email, role };
     setTeamMembers([...teamMembers, newMember]);
     setEmail('');
-    setRole('Product Owner');
+    setRole('Business Analyst');
   };
 
   const handleRemoveMember = (emailToRemove, roleToRemove) => {
@@ -357,7 +357,6 @@ const CreateProject = ({ onProjectCreated }) => {
                         title={role}
                         onSelect={(selectedRole) => setRole(selectedRole)}
                       >
-                        <Dropdown.Item eventKey="Product Owner">Product Owner</Dropdown.Item>
                         <Dropdown.Item eventKey="Business Analyst">Business Analyst</Dropdown.Item>
                         <Dropdown.Item eventKey="Software Architect">Software Architect</Dropdown.Item>
                         <Dropdown.Item eventKey="Team Lead">Team Lead</Dropdown.Item>

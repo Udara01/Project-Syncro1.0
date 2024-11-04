@@ -50,17 +50,15 @@ const Sidebar = ({ isSidebarOpen, show, projectId, userRoles }) => {
           </Nav.Item>  
           )}
 
+          {actualProjectId && (
+          <Nav.Item className="nav-item">
+            <Nav.Link href={`/projects/${projectId}/project-teem`} className="d-flex align-items-center">
+              <LuUsers className="me-2" />
+              <span>Team members</span>
+            </Nav.Link>
+          </Nav.Item>  
+          )}
 
-
-
-
-
-        <Nav.Item className="nav-item">
-          <Nav.Link href={`/projects/${projectId}/project-teem`} className="d-flex align-items-center">
-            <LuUsers className="me-2" />
-            <span>Teams</span>
-          </Nav.Link>
-        </Nav.Item>
         <Nav.Item className="nav-item">
           <Nav.Link href="/projects" className="d-flex align-items-center">
             <FiLayers className="me-2" />

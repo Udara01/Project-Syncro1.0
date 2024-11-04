@@ -1,0 +1,112 @@
+.user-teams-container {
+  width: 1500px;
+  max-width: 2000px;
+  margin: 0 auto;
+}
+
+.project-card {
+  border-radius: 10px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  transition: transform 0.3s ease;
+}
+
+.project-card:hover {
+  transform: translateY(-5px);
+}
+
+.project-header {
+  background: linear-gradient(135deg, #007bff, #6f42c1);
+  border-radius: 10px 10px 0 0;
+  color: #fff;
+  padding: 15px;
+  text-align: center;
+  font-size: 1.25rem;
+  font-weight: 600;
+}
+
+.card-body {
+  padding: 20px;
+}
+
+.member-list {
+  padding-left: 0;
+  list-style: none;
+}
+
+.member-card {
+  background-color: #f9f9f9;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  padding: 10px 15px;
+  margin-bottom: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.member-card .member-details {
+  display: flex;
+  align-items: center;
+}
+
+.member-icon {
+  margin-right: 10px;
+  color: #007bff;
+  font-size: 1.2rem;
+}
+
+.member-email {
+  font-weight: 600;
+  color: #333;
+  font-size: 0.9rem;
+}
+
+.member-role {
+  font-weight: 500;
+  color: #6c757d;
+  font-size: 0.85rem;
+  text-align: right;
+}
+
+.loading-spinner {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 1.25rem;
+  color: #6c757d;
+  margin-top: 50px;
+}
+
+
+.user-teams-container {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.col-md-6 {
+  flex: 0 0 50%;
+  max-width: 50%;
+}
+
+.toggle-members-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: none;
+  border: none;
+  color: #007bff;
+  font-size: 1rem;
+  font-weight: 500;
+  margin-bottom: 10px;
+  cursor: pointer;
+}
+
+.toggle-members-btn svg {
+  margin-left: 5px;
+}
+
+.member-list {
+  padding-left: 0;
+  list-style: none;
+  margin-top: 10px;
+}
