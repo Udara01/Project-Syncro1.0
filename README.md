@@ -8,10 +8,12 @@ Project-Syncro1.0 is a comprehensive system designed to enhance project and remo
 ## Table of Contents
 
 - [Features](#features)
+- [Technologies_Used](#Technologies_Used)
 - [Demo](#demo)
+- [Prerequisites](#Prerequisites)
 - [Installation](#installation)
 - [Usage](#usage)
-- [Contributing](#contributing)
+- [Future_Features](#Future_Features)
 - [License](#license)
 - [Contact](#contact)
 
@@ -25,11 +27,34 @@ Project-Syncro1.0 is a comprehensive system designed to enhance project and remo
 - **Productivity Analysis**: Analyze team performance with built-in analytics tools.
 - **User Management**: Manage user roles and permissions to control access.
 
+## Technologies_Used
+- **Frontend**: ![React.js](https://img.shields.io/badge/Frontend-React.js-61DAFB?logo=react)
+                ![CSS](https://img.shields.io/badge/Styling-CSS-1572B6?logo=css3)
+                ![Bootstrap](https://img.shields.io/badge/Styling-Bootstrap-7952B3?logo=bootstrap)
+
+- **Backend**: ![Node.js](https://img.shields.io/badge/Backend-Node.js-339933?logo=node.js) ![Express.js](https://img.shields.io/badge/Backend-Express.js-000000?logo=express)
+
+- **Database**: ![MongoDB](https://img.shields.io/badge/Database-MongoDB-47A248?logo=mongodb)
+- **Authentication**: JSON Web Tokens![JWT](https://img.shields.io/badge/Authentication-JWT-000000?logo=jsonwebtokens)
+- **Video Conferencing**: ![Zoom APIs](https://img.shields.io/badge/Video%20Conferencing-Zoom%20APIs-2D8CFF?logo=zoom)
+
+
 ## Demo
 
-A live demo of the project is available at [Project-Syncro1.0 Demo](https://example.com/demo).
+A live demo of the project is available at: [Project-Syncro1.0 Demo](https://project-syncro.vercel.app)
+
+Here's the corrected **Installation** section with the details about running the backend and frontend separately, as well as installing dependencies for both parts:
+
+---
+
+## Prerequisites
+- ![Node.js](https://img.shields.io/badge/Node.js-v14%2B-green) (v14 or later)  
+- ![npm](https://img.shields.io/badge/npm-v6%2B-CB3837?logo=npm) (v6 or later)  
+- ![MongoDB](https://img.shields.io/badge/MongoDB-Local%20or%20Cloud%20Atlas-47A248?logo=mongodb)  
+
 
 ## Installation
+---
 
 To set up the project locally, follow these steps:
 
@@ -45,22 +70,47 @@ To set up the project locally, follow these steps:
    cd Project-Syncro1.0
    ```
 
-3. **Install server dependencies**:
+3. **Install backend dependencies**:
+
+   Navigate to the `Backend` directory and install the required dependencies:
 
    ```bash
+   cd Backend
    npm install
    ```
 
-4. **Navigate to the client directory and install dependencies**:
+4. **Start the backend server**:
+
+   Run the backend server using `nodemon`:
 
    ```bash
-   cd client
+   nodemon server.js
+   ```
+
+   The backend server will start running on the specified port (e.g., `http://localhost:5000`).
+
+5. **Install frontend dependencies**:
+
+   Navigate to the `react-project-syncro` directory and install the required dependencies:
+
+   ```bash
+   cd ../react-project-syncro
    npm install
    ```
 
-5. **Set up environment variables**:
+6. **Start the frontend application**:
 
-   Create a `.env` file in the root directory and add the following:
+   Run the frontend development server:
+
+   ```bash
+   npm start
+   ```
+
+   The frontend application should now be running at `http://localhost:3000`.
+
+7. **Set up environment variables**:
+
+   In the `Backend` directory, create a `.env` file and add the following:
 
    ```env
    NODE_ENV=development
@@ -69,15 +119,11 @@ To set up the project locally, follow these steps:
    JWT_SECRET=your_secret_key
    ```
 
-6. **Start the development server**:
+   Replace `your_mongodb_connection_string` and `your_secret_key` with the appropriate values.
 
-   In the root directory:
+---
 
-   ```bash
-   npm run dev
-   ```
-
-   The application should now be running at `http://localhost:5000`.
+After completing these steps, your project should be fully functional with the backend running on `http://localhost:5000` and the frontend running on `http://localhost:3000`.
 
 ## Usage
 
@@ -90,33 +136,11 @@ After installation, you can:
 - **Initiate virtual meetings** directly from the platform.
 - **Analyze productivity** through the analytics dashboard.
 
-## Contributing
 
-Contributions are welcome! Please follow these steps:
-
-1. **Fork the repository**.
-2. **Create a new branch**:
-
-   ```bash
-   git checkout -b feature/YourFeatureName
-   ```
-
-3. **Make your changes**.
-4. **Commit your changes**:
-
-   ```bash
-   git commit -m 'Add some feature'
-   ```
-
-5. **Push to the branch**:
-
-   ```bash
-   git push origin feature/YourFeatureName
-   ```
-
-6. **Open a pull request**.
-
-Ensure your code adheres to the project's coding standards and includes appropriate tests.
+## Future_Features
+- Integration with third-party project management tools.
+- Mobile application support.
+- Advanced reporting and analytics dashboards.
 
 ## License
 
