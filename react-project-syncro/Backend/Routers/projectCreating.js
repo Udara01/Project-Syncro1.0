@@ -291,13 +291,8 @@ router.put('/:id', upload.single('projectImage'), async (req, res) => {
       return res.status(404).json({ message: 'Project not found' });
     }
 
-    const manager = {
-      email: existingProject.projectManager,
-      role: 'Project Manager'
-    };
-
-    // Combine the manager with new team members
-    const allTeamMembers = [manager, ...JSON.parse(teamMembers)];
+   
+    const allTeamMembers = [...JSON.parse(teamMembers)];
     
     // Handle the project image update if a new image is uploaded
     const updateData = {
