@@ -1,9 +1,9 @@
 # Project-Syncro1.0
 Project-Syncro1.0 is a comprehensive system designed to enhance project and remote work management. It offers features such as task tracking, milestone management, team collaboration, time tracking, virtual meetings, productivity analysis, and user management. Built with Node.js/Express, React.js, MongoDB, and video conferencing APIs, it aims to boost team productivity and communication.
 
-![Landing_Page Screenshot](Backend/uploads/LandPage.png)
-
-![Dashboard Screenshot](Backend/uploads/Dashboard.png)
+![Landing_Page Screenshot](Backend\uploads\Dashboard.png)
+ 
+![Dashboard Screenshot](Backend\uploads\Dashboard.png)
 
 ## Table of Contents
 
